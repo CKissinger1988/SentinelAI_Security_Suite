@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
     if (action === "analyzeLog") {
       const { logText, endpointName } = payload;
       
-      const prompt = `You are an elite ML-powered Enterprise Cyber Security Incident Responder for the "SentinelAI Security Suite".
+      const prompt = `You are an elite ML-powered Enterprise Cyber Security Incident Responder for the "SpartanAI Security Suite".
 Analyze the security logs or threat context below for the endpoint "${endpointName}".
 
 SECURITY LOG / INCIDENT CONTEXT:
@@ -77,7 +77,7 @@ Ensure your response is secure, professional, direct, and avoids any robotic flu
 
 ### 5. **SIEM Threat Intelligence Rule (Sigma format)**
 \`\`\`yaml
-title: SentinelAI Outbound C2 Beaconing Detected
+title: SpartanAI Outbound C2 Beaconing Detected
 status: experimental
 logsource:
     category: process_creation
@@ -113,7 +113,7 @@ level: high
     if (action === "complianceReport") {
       const { framework, scope, tenant, stats } = payload;
 
-      const prompt = `You are a Lead Business & Cyber IT Compliance Auditor for enterprise clients using the 'SentinelAI Security Suite'.
+      const prompt = `You are a Lead Business & Cyber IT Compliance Auditor for enterprise clients using the 'SpartanAI Security Suite'.
 Compile a formal Enterprise Compliance Alignment & Readiness Audit Report.
 
 AUDIT PARAMETERS:
@@ -133,7 +133,7 @@ Include these exact sections:
 2. **AUDIT STANDARDS GAP ANALYSIS SCORECARD**: (Section-by-section compliance check specific to ${framework} controls)
 3. **PATCH & ENDPOINT VERIFICATION LEDGER**: (Analysis of patched security nodes vs vulnerable ones, assessment of automated compliance readiness)
 4. **MITIGATION ACTIONS FOR AUDIT PREPARATION**: (List prioritized actions SecOps team must perform before formal verification)
-5. **OFFICIAL COMPLIANCE READINESS CERTIFICATION DECISION**: (State audit outlook: E.g., Ready with Conditions, fully ready, or Remediation Required. Provide a signature placeholder block [SentinelAI ML Audit Assessor - Gemini AI])
+5. **OFFICIAL COMPLIANCE READINESS CERTIFICATION DECISION**: (State audit outlook: E.g., Ready with Conditions, fully ready, or Remediation Required. Provide a signature placeholder block [SpartanAI ML Audit Assessor - Gemini AI])
 
 Make the report detailed, official, specific to ${framework} controls, and clear of any fluff.`;
 
@@ -189,7 +189,7 @@ A system snapshot verified the deployment of patches:
 **Assessed and Compiled by:**
 \`\`\`text
 ------------------------------------------------------------------
-SentinelAI ML Audit Assessor
+SpartanAI ML Audit Assessor
 Underwritten by Gemini Engine (Simulated Endpoint Assessment Mode)
 Security Intelligence Integrity: VERIFIED
 ------------------------------------------------------------------

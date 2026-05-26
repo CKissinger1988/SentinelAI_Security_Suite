@@ -105,11 +105,11 @@ def absolute_purge():
     # 4. Cleanup Kali WSL
     print(f"{CYAN}[*] Synchronizing sanitization to WSL Kali...{ENDC}")
     wsl_cmds = [
-        "rm -rf ~/SentinelAI/scripts/purge_simulations.sh",
-        "rm -rf ~/SentinelAI/scripts/remove_simulations.py",
-        "rm -rf ~/SentinelAI/scripts/field_prep_secure.sh",
-        "rm -rf ~/SentinelAI/backend/core/sovereignty_upgrades.py",
-        "find ~/SentinelAI -name '*mock_system*' -type d -exec rm -rf {} +"
+        "rm -rf ~/SpartanAI/scripts/purge_simulations.sh",
+        "rm -rf ~/SpartanAI/scripts/remove_simulations.py",
+        "rm -rf ~/SpartanAI/scripts/field_prep_secure.sh",
+        "rm -rf ~/SpartanAI/backend/core/sovereignty_upgrades.py",
+        "find ~/SpartanAI -name '*mock_system*' -type d -exec rm -rf {} +"
     ]
     for cmd in wsl_cmds:
         try:

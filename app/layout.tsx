@@ -13,7 +13,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'SentinelAI Security Suite | Enterprise Endpoint Security',
+  title: 'SpartanAI Security Suite | Enterprise Endpoint Security',
   description: 'Enterprise-grade endpoint security dashboard with ML threat detection, vulnerability patching, SIEM feeds, RBAC, and AI audit reports.',
 };
 
