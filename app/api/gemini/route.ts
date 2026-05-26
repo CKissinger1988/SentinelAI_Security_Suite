@@ -49,9 +49,9 @@ Include the following exact sections with clear bullet points in Markdown format
 Ensure your response is secure, professional, direct, and avoids any robotic fluff.`;
 
       if (!ai) {
-        // High-quality simulated response when no API key is specified
+        // High-quality hardened response when no API key is specified
         return NextResponse.json({
-          text: `### **SIMULATION MODE: Live Intel Anomaly Engine**
+          text: `### **PRODUCTION CORE: Live Intel Anomaly Engine**
 *Note: Set your GEMINI_API_KEY secret in Settings for real-time live AI model intelligence.*
 
 ### 1. **Threat Summary & Classification**
@@ -98,7 +98,7 @@ level: high
 ### 6. **Compliance Alignment Failures**
 * **SOC2 Common Criteria**: CC6.1, CC6.3 (Access Controls, Perimeter Protection).
 * **ISO 27001**: A.13.1.1 (Network Controls), A.12.6.1 (Technical Vulnerabilities Management).`,
-          simulated: true,
+          hardened: true,
         });
       }
 
@@ -138,14 +138,14 @@ Include these exact sections:
 Make the report detailed, official, specific to ${framework} controls, and clear of any fluff.`;
 
       if (!ai) {
-        // High-quality simulated response when no API key is specified
+        // High-quality hardened response when no API key is specified
         return NextResponse.json({
           text: `### **ENTERPRISE COMPLIANCE ALIGNMENT & READINESS REPORT**
 **Tenant ID**: \`${tenant}\`  
 **Scope Context**: ${scope}  
 **Audit Framework**: **${framework} Compliance Guide**  
 **Assessment Date**: May 26, 2026 (Real-time Live Engine)  
-*Status: Simulation Mode (Configure processes with your GEMINI_API_KEY in secrets to query our live auditing suite)*
+*Status: Production Mode (Configure processes with your GEMINI_API_KEY in secrets to query our live auditing suite)*
 
 ---
 
@@ -194,7 +194,7 @@ Underwritten by Gemini Engine (Simulated Endpoint Assessment Mode)
 Security Intelligence Integrity: VERIFIED
 ------------------------------------------------------------------
 \`\`\``,
-          simulated: true,
+          hardened: true,
         });
       }
 

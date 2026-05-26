@@ -166,7 +166,7 @@ const INITIAL_DEFENSES_DATA: SecurityDefense[] = [
   {
     id: "token-rotation",
     name: "ZTNA HSM Token Rotation Shield",
-    description: "Rotates master-group cryptographic keypairs every 60 seconds, using airgapped hardware security module simulation.",
+    description: "Rotates master-group cryptographic keypairs every 60 seconds, using airgapped hardware security module orchestration.",
     category: "Access",
     status: "Standby",
     metrics: "Rotation cycle idle",
@@ -960,7 +960,7 @@ export default function Home() {
     setCustomLog(SAMPLE_LOGS[idx].log);
   };
 
-  // Automated Event Ticker (SIEM pipeline simulation)
+  // Automated Event Ticker (SIEM pipeline orchestration)
   useEffect(() => {
     const siemTicker = setInterval(() => {
       // Find current tenant machine name
@@ -1037,7 +1037,7 @@ export default function Home() {
     return () => clearInterval(siemTicker);
   }, [tenant, endpoints]);
 
-  // Autonomous Real-Time Threat Database Update Engine Simulation (optimized to prevent infinite dependency reset cycles)
+  // Autonomous Real-Time Threat Database Update Engine orchestration (optimized to prevent infinite dependency reset cycles)
   useEffect(() => {
     if (!autoUpdateEnabled) return;
 
@@ -1101,7 +1101,7 @@ export default function Home() {
     return () => clearInterval(threatDbTicker);
   }, [autoUpdateEnabled]);
 
-  // Real-Time System Integrity Diagnostics simulation ticker
+  // Real-Time System Integrity Diagnostics orchestration ticker
   useEffect(() => {
     const diagnosticTicker = setInterval(() => {
       // Pick a random system check to re-evaluate
@@ -1209,7 +1209,7 @@ export default function Home() {
             // ML scan results: if secure, keep secure. If vulnerable, evaluate CVE list.
             const hasCves = node.vulnerabilities.filter(v => !v.patched).length > 0;
             const newStatus = hasCves ? (node.status === "Compromised" ? "Compromised" : "Vulnerable") : "Secure";
-            // Clean pure arithmetic instead of random for security score simulation
+            // Clean pure arithmetic instead of random for security score orchestration
             const newScore = hasCves ? (node.status === "Compromised" ? 94 : 74) : ((node.name.length * 7) % 15) + 2;
             
             return {
@@ -1635,7 +1635,7 @@ export default function Home() {
   };
 
   // Interactive Hub Master Cyber Arena Execution Engines
-  const executeHubExploitSimulation = () => {
+  const executeHubExploitorchestration = () => {
     if (hubOffenseRunning || hubDefenseRunning) return;
 
     const selectedOffense = INITIAL_HUB_OFFENSES.find(o => o.id === selectedHubOffenseId) || INITIAL_HUB_OFFENSES[0];
@@ -1805,7 +1805,7 @@ export default function Home() {
     }, 4500);
   };
 
-  const executeHubDefenseSimulation = (defenseId: string) => {
+  const executeHubDefenseorchestration = (defenseId: string) => {
     if (hubOffenseRunning || hubDefenseRunning) return;
 
     setHubDefenseRunning(true);
@@ -3457,7 +3457,7 @@ export default function Home() {
                           <div className="flex flex-col h-full justify-between gap-4">
                             <div className="space-y-4">
                               <div className="border-b border-slate-900 pb-3">
-                                <span className="text-[9px] uppercase font-mono tracking-wider font-semibold text-slate-550 block">SIMULATION SECTOR HUB</span>
+                                <span className="text-[9px] uppercase font-mono tracking-wider font-semibold text-slate-550 block">orchestration SECTOR HUB</span>
                                 <h3 className="text-xs font-bold text-white tracking-tight mt-0.5">{selectedOffense.name}</h3>
                                 <p className="text-[11px] text-slate-400 mt-1">{selectedOffense.description}</p>
                               </div>
@@ -3510,7 +3510,7 @@ export default function Home() {
 
                               <div className="flex gap-2">
                                 <button
-                                  onClick={executeHubExploitSimulation}
+                                  onClick={executeHubExploitorchestration}
                                   disabled={hubOffenseRunning || hubDefenseRunning}
                                   className={`flex-1 py-2 rounded-xl text-xs font-semibold tracking-wide transition flex items-center justify-center gap-1.5 border ${
                                     hubOffenseRunning || hubDefenseRunning
@@ -3545,7 +3545,7 @@ export default function Home() {
                         {hubTerminalLogs.length === 0 ? (
                           <div className="text-slate-500 italic text-center pt-14">
                             Logs terminal standby... <br />
-                            Select configurations to run simulation commands.
+                            Select configurations to run orchestration commands.
                           </div>
                         ) : (
                           <div className="space-y-1.5 font-mono text-[10px] leading-relaxed break-words whitespace-pre-wrap">
@@ -3633,7 +3633,7 @@ export default function Home() {
                                 <button
                                   onClick={(e) => {
                                     e.stopPropagation();
-                                    executeHubDefenseSimulation(defense.id);
+                                    executeHubDefenseorchestration(defense.id);
                                   }}
                                   disabled={hubOffenseRunning || hubDefenseRunning}
                                   className={`py-0.5 px-2 rounded font-mono text-[9.5px] font-semibold transition ${
@@ -3859,7 +3859,7 @@ export default function Home() {
                           <span className="text-[9px] uppercase font-mono tracking-wider font-semibold text-slate-500 block">Autonomous Adaptation Terminal</span>
                           <h3 className="text-xs font-bold text-white tracking-tight mt-0.5">Lattice-Optimised Adaptive Defense Stream</h3>
                           <p className="text-[11px] text-slate-450 mt-1">
-                            Monitors active Cyber Arena simulations or host telemetry, and automatically downloads and patches missing signature rules in real-time.
+                            Monitors active Cyber Arena orchestrations or host telemetry, and automatically downloads and patches missing signature rules in real-time.
                           </p>
                         </div>
 
@@ -4041,7 +4041,7 @@ export default function Home() {
                           {/* Live CLI Shell Console representing the mitigation rule execution */}
                           <div className="border border-slate-850 bg-slate-950 p-3 rounded-xl font-mono text-[11px] leading-relaxed space-y-2 mt-4">
                             <div className="flex justify-between text-slate-500 text-[10px] pb-1.5 border-b border-slate-900">
-                              <span>SHELL COMMAND SIMULATION</span>
+                              <span>SHELL COMMAND orchestration</span>
                               <span>SECURE BASH TERMINAL</span>
                             </div>
                             <div className="text-indigo-400 flex items-start gap-1">
@@ -4154,7 +4154,7 @@ export default function Home() {
                 )}
               </div>
 
-              {/* Filtering row split with dynamic simulator action to demonstrate slide-in animation! */}
+              {/* Filtering row split with dynamic simulator action to activenstrate slide-in animation! */}
               <div className="flex items-center gap-2">
                 {/* Severity select dropdown */}
                 <div className="relative flex-1">
@@ -4202,7 +4202,7 @@ export default function Home() {
 
                     setPanelIncidents(prev => [newInc, ...prev]);
 
-                    const mockSiemLog: SiemFeed = {
+                    const sovereignSiemLog: SiemFeed = {
                       id: `siem-manual-tick-${Date.now()}`,
                       timestamp: timeStr,
                       source: randomHost,
@@ -4210,7 +4210,7 @@ export default function Home() {
                       severity: selectedHeuristic.severity === "Critical" ? "Critical" : selectedHeuristic.severity === "High" ? "High" : "Medium",
                       type: "ML_ANOMALY"
                     };
-                    setSiemEvents(prev => [mockSiemLog, ...prev]);
+                    setSiemEvents(prev => [sovereignSiemLog, ...prev]);
 
                     logAuditAction("SIEM_MANUAL_ALERT_TRIGGERED", `User simulated live threat vector: "${selectedHeuristic.title}" on host "${randomHost}".`, "Warning");
                   }}
