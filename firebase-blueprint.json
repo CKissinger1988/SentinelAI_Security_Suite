@@ -1,0 +1,22 @@
+{
+  "entities": {
+    "EncryptedRecord": {
+      "title": "EncryptedRecord",
+      "description": "A wrapper for encrypted data.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "The ID of the user who owns the record" },
+        "encryptedData": { "type": "string", "description": "The base64 encoded encrypted data string" },
+        "iv": { "type": "string", "description": "The initialization vector (base64 encoded)" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the record was created" }
+      },
+      "required": ["userId", "encryptedData", "iv", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/encrypted_records/{recordId}": {
+      "schema": { "$ref": "EncryptedRecord" },
+      "description": "Storage for encrypted user data."
+    }
+  }
+}

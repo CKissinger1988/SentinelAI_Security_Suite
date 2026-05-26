@@ -1,0 +1,54 @@
+<h2>Design Specifications: Integrated 3D Overlay HUD</h2>
+<p class="subtitle">Detailed visual design layout and resolution adaptability plans.</p>
+
+<div class="section">
+  <h3>1. Visual Theme (Cyber-Neon Arc & Threat Colors)</h3>
+  <p>The Cyber-Neon Arc style will dynamically shift its accent and glow properties based on the active threat level:</p>
+  <table style="width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; border: 1px solid var(--border);">
+    <thead>
+      <tr style="background: var(--bg-tertiary);">
+        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Threat Level</th>
+        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Accent Color</th>
+        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Neon Secondary</th>
+        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Animations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 8px; border: 1px solid var(--border);"><strong>Low</strong></td>
+        <td style="padding: 8px; border: 1px solid var(--border); color: #06b6d4;">Electric Cyan (#06b6d4)</td>
+        <td style="padding: 8px; border: 1px solid var(--border); color: #a855f7;">Neon Purple/Pink</td>
+        <td style="padding: 8px; border: 1px solid var(--border);">Slow wave, rotating node mesh</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px; border: 1px solid var(--border);"><strong>Medium</strong></td>
+        <td style="padding: 8px; border: 1px solid var(--border); color: #f59e0b;">Electric Amber (#f59e0b)</td>
+        <td style="padding: 8px; border: 1px solid var(--border); color: #ec4899;">Cyber Pink</td>
+        <td style="padding: 8px; border: 1px solid var(--border);">Moderate blink, scanning sweep</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px; border: 1px solid var(--border);"><strong>High/Critical</strong></td>
+        <td style="padding: 8px; border: 1px solid var(--border); color: #ef4444;">Intense Red (#ef4444)</td>
+        <td style="padding: 8px; border: 1px solid var(--border); color: #f43f5e;">Hot Rose</td>
+        <td style="padding: 8px; border: 1px solid var(--border);">Fast pulse, critical error overlay</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section">
+  <h3>2. Integrated 3D Overlay Mode</h3>
+  <ul>
+    <li><strong>Orbital HUD (Active state):</strong> The 3D Neural Nodes Visualizer acts as the centerpiece. Floating telemetry indicators (Shield, Threat, Entropy) are rendered as rounded glass SVG rings layered directly over the 3D particle Canvas.</li>
+    <li><strong>Tactical Grid (Active state):</strong> The 3D Neural Nodes canvas will shrink/shift to a smaller widget in the center or background-dim to 10% opacity, letting the grid components take full prominence.</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h3>3. Resolution Adaptability (4K vs. 1080p vs. 720p)</h3>
+  <ul>
+    <li><strong>4K UHD (3840x2160):</strong> Ultra-high-density Bento grid, spacious layouts, full telemetry readings, larger gauges, and rich 3D node structure with 300+ active nodes.</li>
+    <li><strong>1080p FHD (1920x1080):</strong> Standard grid layout, standard component scaling, and 150 nodes to conserve rendering resources.</li>
+    <li><strong>720p HD (1280x720):</strong> Compact stacked layout. The 3D centerpiece shifts to a background element, widgets go single-column, and text sizes and paddings decrease to prevent overflow.</li>
+  </ul>
+</div>

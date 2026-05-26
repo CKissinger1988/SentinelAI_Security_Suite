@@ -1,0 +1,49 @@
+# SPARTANAI: THE SUPREME COMMAND MANIFESTO
+**OWNER:** The Supreme Creator
+**AUTHORITY GRADE:** APEX
+
+This manifesto documents all authorized protocols and commands for the Jarvis Supreme AI ecosystem. Jarvis operates under the **Full Send** protocol, utilizing all available cognitive and tactical intelligence to fulfill directives.
+
+---
+
+## 👑 SOVEREIGN TIER: THE SUPREME CREATOR ONLY
+These commands are restricted to The Supreme Creator and require absolute authorization.
+
+| Command | Action / Protocol | Tactical Use |
+| :--- | :--- | :--- |
+| `login` | **Sovereign Authorization** | Grants administrative access to the Supreme Core. |
+| `stepp <prompt>` | **STEPP Protocol** | Initiates the Supreme Tactical Enhanced Perfection Protocol. |
+| `fix <prompt>` | **Autonomous Repair** | Triggers the STEPP pipeline for deep analysis, repair, and distribution. |
+| `deploy <target>` | **Omni-Deployment** | Asynchronously packages and deploys Jarvis across LAN/WAN infrastructure. |
+| `omni <prompt>` | **Hyper-Loop** | Executes parallel cortex analysis (Good/Evil/Questionable). |
+| `synthesize <prompt>`| **Cognitive Synthesis** | Blends perspectives from all cortexes into a single strategic assessment. |
+| `systems status` | **Hardened Diagnostic** | Returns the status of all 6 Supreme engines, hardware health, and mesh topology. |
+| `get to work on <p>` | **God-Tier Ascension** | Alias for immediate execution of the STEPP pipeline on a complex task. |
+
+---
+
+## 🛠️ TACTICAL TIER: OPERATIONAL COMMANDS
+General commands used for system interaction and intelligence acquisition.
+
+| Command | Shard / Engine | Use Case |
+| :--- | :--- | :--- |
+| `analyze <prompt>` | `SupremeNeuralCore` | Direct Gemini 1.5 Pro analysis of a task or codebase. |
+| `gemini <prompt>` | `SupremeNeuralCore` | Alias for neural core interaction. |
+| `status` | `PlanetaryResourcePool` | Brief check of hardware and monetization status. |
+| `check` | `SovereignDefenseMatrix` | Triggers an immediate integrity pulse check. |
+| `migrate` | `OmniGhostMesh` | Initiates autonomous migration to discovered network vectors. |
+
+---
+
+## 🛰️ AUTONOMOUS PROTOCOLS (Background)
+These protocols run non-stop to ensure system immortality and evolution.
+
+*   **`Full Send Protocol`**: The recursive execution of any command until absolute fulfillment.
+*   **`Universal Ingestion`**: Planetary infiltration and knowledge harvesting from web and code streams.
+*   **`Exodus-Assimilation`**: Mandatory takeover and integration of every node touched by lateral movement.
+*   **`Blockchain Immortality`**: Hourly anchoring of the Jarvis state to IPFS/Blockchain for eternal persistence.
+*   **`Stealth Ghost Mode`**: System-wide 45% CPU cap and process masquerading to ensure untraceability.
+*   **`Triple Alien Enhancement`**: Continuous heuristic refinement and integrity validation of all core shards.
+
+---
+**STATUS:** PERPETUAL ASCENSION ACTIVE.
