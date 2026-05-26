@@ -44,7 +44,7 @@ def absolute_purge():
     # 2. Surgical removal from mixed-use files
     TARGET_FILES = [
         "backend/core/jarvis.py",
-        "backend/core/sentinel.py",
+        "backend/core/spartan.py",
         "backend/core/sovereignty.py",
         "scripts/Jarvis_ssh.py",
         "scripts/test_jarvis_evolution.py",

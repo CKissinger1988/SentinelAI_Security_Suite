@@ -347,7 +347,7 @@ const INITIAL_HUB_DEFENSES: HubDefense[] = [
     name: "Quantum-Safe Kyber-1024 Ephemeral Key Exchange",
     algorithm: "NIST CRYSTALS-Kyber Standard",
     description: "Secures transport-layer handshakes using lattice-based cryptosystems deemed immune to quantum-era decryption calculations.",
-    command: "sentinel-crypto --mechanism kyber1024 --verify-entropy-source --strict",
+    command: "spartan-crypto --mechanism kyber1024 --verify-entropy-source --strict",
     verificationLogs: "[+] Cryptographic pipeline optimized... Loaded crystals-kyber.so.\n[+] Performing 1,024-bit lattice key generation cycle. High entropy verified.\n[+] Ephemeral TLS handshakes enforced for all hosts. Protected from retrospective decryption exploits."
   },
   {
@@ -355,7 +355,7 @@ const INITIAL_HUB_DEFENSES: HubDefense[] = [
     name: "AES-GCM-256 Nonce-Randomized Cryptographic Shield",
     algorithm: "AES-GCM-256 (FIPS-197-Compliant)",
     description: "Locks core tenant disk configurations, application caches, and key registers with hardware-accelerated 256-bit AES-GCM cipherkeys using highly random nonces.",
-    command: "sentinel-vault --encrypt-aes-gcm --key-source local-tpm2.0 --bits 256",
+    command: "spartan-vault --encrypt-aes-gcm --key-source local-tpm2.0 --bits 256",
     verificationLogs: "[+] Handshaking with secure onboard TPM 2.0 enclave ... Linked.\n[+] Applying AES-GCM-256 to host directory structures...\n[+] Injected encrypted GCM verification tags. System integrity and confidentiality strictly locked."
   },
   {
@@ -363,7 +363,7 @@ const INITIAL_HUB_DEFENSES: HubDefense[] = [
     name: "Local Security Authority PPL Shielding",
     algorithm: "Ring-0 Kernel Protected Process Light (PPL)",
     description: "Enforces virtual memory boundary locks, running the win32 lsass.exe executable inside a restricted secure Ring-0 kernel frame.",
-    command: "sentinel-kernel --enable-lsa-protection --force-ppl --lock-process-pages",
+    command: "spartan-kernel --enable-lsa-protection --force-ppl --lock-process-pages",
     verificationLogs: "[+] Registry hive audited... LsaDbProtect set to value: 1.\n[+] Kernel driver std_fs_mon validated process container state.\n[+] LSASS PID 624 marked as PPL-Protected. Secondary process address attachments rejected."
   },
   {
@@ -371,7 +371,7 @@ const INITIAL_HUB_DEFENSES: HubDefense[] = [
     name: "LDAP Channel Binding & RPC Signature Hardening",
     algorithm: "Mutual TLS v1.3 & Encrypted RPC Armor",
     description: "Bridges active directory authorization sessions over strict mutual TLS, rendering ticket replay and unauthenticated LDAP impersonations impossible.",
-    command: "sentinel-ad --enforce-channel-binding --rpc-signature-seal --require-mutual-tls",
+    command: "spartan-ad --enforce-channel-binding --rpc-signature-seal --require-mutual-tls",
     verificationLogs: "[+] Custom certificate authority validated for corporate domain servers.\n[+] Channel binding verification schemas enabled. Ticket relay attacks mitigated.\n[+] Active Directory remote connection lines bound strictly within mutual TLS."
   },
   {
@@ -379,7 +379,7 @@ const INITIAL_HUB_DEFENSES: HubDefense[] = [
     name: "Argon2id Memory-Hard Key Derivation",
     algorithm: "Argon2id (Salt-Bounded)",
     description: "Processes password strings and secret master keys using Argon2id with memory-hard parameters, ensuring decryption databases are immune to parallel GPU compilation attacks.",
-    command: "sentinel-kdf --algorithm argon2id --memory-mb 64 --iterations 3 --threads 4",
+    command: "spartan-kdf --algorithm argon2id --memory-mb 64 --iterations 3 --threads 4",
     verificationLogs: "[+] Key derivation profile established: Argon2id.\n[+] Compulsory memory allocation: 64 Megabytes per hash loop.\n[+] Computation cost: 410ms. Offline database cracking attempts rendered entirely infeasible."
   },
   {
@@ -387,7 +387,7 @@ const INITIAL_HUB_DEFENSES: HubDefense[] = [
     name: "Intel SGX CPU Enclave Isolation & Sandbox Execution",
     algorithm: "Hardware Cryptographic CPU Secure Enclave",
     description: "Sandboxes executing program logic and cryptographic tokens in private, hardware-isolated computer memory pages, blocking local admin exploits.",
-    command: "sentinel-cpu --sgx-enclave-init --target-pid * --restrict-context-read",
+    command: "spartan-cpu --sgx-enclave-init --target-pid * --restrict-context-read",
     verificationLogs: "[+] Checking processor capabilities... Intel SGX feature active.\n[+] Booting secure processor page cache spaces. Mappings encrypted dynamically.\n[+] Kernel thread isolation complete. Memory execution space completely private."
   },
   {
@@ -395,7 +395,7 @@ const INITIAL_HUB_DEFENSES: HubDefense[] = [
     name: "Dynamic Kernel Patch Protection Safeguards (PatchGuard II)",
     algorithm: "Integrity Ring-0 Memory Audit",
     description: "Periodically validates system kernel address dispatch lists, blocking unapproved assembly loads, system modifications, or rogue DLL hijack setups.",
-    command: "sentinel-kernel --verify-kernel-pointers --enforce-patch-guard --depth-scan",
+    command: "spartan-kernel --verify-kernel-pointers --enforce-patch-guard --depth-scan",
     verificationLogs: "[+] Invoking Ring-0 integrity sweep. Analyzing loaded driver headers...\n[+] System Service Dispatch Table (SSDT) checked. Kernel function offsets validated.\n[+] Dynamic pointer integrity verified. Unapproved DLL system files rejected."
   },
   {
@@ -403,7 +403,7 @@ const INITIAL_HUB_DEFENSES: HubDefense[] = [
     name: "eBPF Low-Level Syscall Land Probe Monitoring",
     algorithm: "Kernel System Call Probe sandboxing",
     description: "Inserts tiny, byte-compiled bytecode traps directly into operating system syscall layers, logging or shutting down suspicious file writes and network egress requests.",
-    command: "sentinel-ebpf --attach-syscall-probe --filter-profile deep-alert --verbose",
+    command: "spartan-ebpf --attach-syscall-probe --filter-profile deep-alert --verbose",
     verificationLogs: "[+] eBPF program signature verified... Instantiating kernel eBPF engine.\n[+] Connected active probes to sys_enter_connect and sys_enter_execve triggers.\n[+] Real-time system shell and network execution logging online."
   },
   {
@@ -411,7 +411,7 @@ const INITIAL_HUB_DEFENSES: HubDefense[] = [
     name: "SHA-3 512-Bit Decentralized Zero-Trust Integrity Auditer",
     algorithm: "FIPS-202 Cryptographic Hash",
     description: "Computes sub-millisecond cryptographic digests of operational files, immediately identifying malware compromises, altered executables, or encryption attempts.",
-    command: "sentinel-audit --verify-hashes sha3-512 --root C:\\windows\\System32\\",
+    command: "spartan-audit --verify-hashes sha3-512 --root C:\\windows\\System32\\",
     verificationLogs: "[+] Cataloging operational assembly digests utilizing SHA-3 512-bit index.\n[+] Validating results against trusted system reference tables...\n[+] Zero file alterations detected. Target environment file paths verified secure."
   },
   {
@@ -419,7 +419,7 @@ const INITIAL_HUB_DEFENSES: HubDefense[] = [
     name: "Zero-Knowledge Multi-Party Cryptographic Sign Ledger",
     algorithm: "zk-SNARK Consensus Proof Verification",
     description: "Proves database query correctness and system integrity variables dynamically, recording audits on a decentralized peer ledger without leaking plain-text information.",
-    command: "sentinel-ledger --authenticate-zksnark --target-audit-db --enforce-multi-party",
+    command: "spartan-ledger --authenticate-zksnark --target-audit-db --enforce-multi-party",
     verificationLogs: "[+] Generating zero-knowledge mathematical proofs for core queries.\n[+] Validating keys across 3 redundant audit validators...\n[+] zk-SNARK validation passed. Proof log permanently recorded in security ledger."
   }
 ];
@@ -482,7 +482,7 @@ const INITIAL_THREAT_DATABASES: ThreatDatabase[] = [
     accuracyRate: "99.91%"
   },
   {
-    id: "sentinel-neural",
+    id: "spartan-neural",
     name: "SpartanAI Deep Neural Vector Index",
     provider: "SpartanAI Cloud Hub Master",
     signaturesCount: 3105501,
@@ -3353,7 +3353,7 @@ export default function Home() {
               </div>
             )}
 
-            {/* TAB 8: SENTINELAI HUB MASTER & CYBER ARENA */}
+            {/* TAB 8: SPARTANAI HUB MASTER & CYBER ARENA */}
             {activeTab === "hubmaster" && (
               <div className="flex-1 flex flex-col pt-1" id="view-hubmaster">
                 <div className="flex items-center justify-between pb-4 border-b border-slate-850">
@@ -4045,7 +4045,7 @@ export default function Home() {
                               <span>SECURE BASH TERMINAL</span>
                             </div>
                             <div className="text-indigo-400 flex items-start gap-1">
-                              <span className="text-emerald-500 font-bold">sentinel-ops#</span> 
+                              <span className="text-emerald-500 font-bold">spartan-ops#</span> 
                               <span className="break-all whitespace-pre-wrap select-all">{selectedDefense.command}</span>
                             </div>
                             <div className="text-slate-450 text-[10px] pt-1 leading-normal border-t border-slate-900/60 break-all whitespace-pre-wrap select-none">
