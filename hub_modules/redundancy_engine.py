@@ -1,7 +1,7 @@
 import subprocess
 import json
 
-class SentinelRedundancyEngine:
+class SpartanAIRedundancyEngine:
     """Orchestrates hardware-level redundancy, RAID, and hot-swap events."""
 
     def initialize_raid_array(self, drive_letters, raid_level=1):

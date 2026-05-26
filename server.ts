@@ -938,10 +938,10 @@ if (!fs.existsSync(HUB_PULL_DEST)) {
 
 const HUB_REGISTRY = [
   // ── Defensive Mesh ──────────────────────────────────────────────────────────
-  { id: 'spartan-core',       file: 'spartan.py',             sourcePath: 'backend/core/spartan.py',                           category: 'defensive', size: 4181 },
+  { id: 'spartan-core',       file: 'spartanai.py',             sourcePath: 'backend/core/spartan.py',                           category: 'defensive', size: 4181 },
   { id: 'sovereign-defense',   file: 'sovereign_defense.py',    sourcePath: 'backend/core/services/sovereign_defense.py',         category: 'defensive', size: 5740 },
   { id: 'self-healing-mesh',   file: 'self_healing_mesh.py',    sourcePath: 'backend/core/services/self_healing_mesh.py',          category: 'defensive', size: 6200 },
-  { id: 'self-healing-spartan', file: 'self_healing_spartan.py', sourcePath: 'backend/core/services/self_healing_spartan.py',   category: 'defensive', size: 6320 },
+  { id: 'self-healing-spartan', file: 'self_healing_spartanai.py', sourcePath: 'backend/core/services/self_healing_spartan.py',   category: 'defensive', size: 6320 },
   { id: 'threat-hunter',       file: 'threat_hunter.py',        sourcePath: 'backend/core/services/threat_hunter.py',             category: 'defensive', size: 6200 },
   { id: 'flash-loan-guard',    file: 'flash_loan_guard.py',     sourcePath: 'backend/core/CognitiveCore/flash_loan_guard.py',     category: 'defensive', size: 156  },
   { id: 'security-shield',     file: 'security_shield.py',      sourcePath: 'backend/core/CognitiveCore/security_shield.py',      category: 'defensive', size: 141  },

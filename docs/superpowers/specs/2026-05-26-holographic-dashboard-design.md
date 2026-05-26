@@ -1,6 +1,6 @@
 # Spec: 4K Holographic Futuristic Dashboard
 
-This document details the architecture and design of the 4K holographic futuristic dashboard upgrade for the SpartanAI AI Sovereign Security Suite (ASOC).
+This document details the architecture and design of the 4K holographic futuristic dashboard upgrade for the SpartanAI Sovereign Security Suite (ASOC).
 
 ## 1. Overview & Goals
 * **Immersive Holographic Style:** Transition the UI to the "Cyber-Neon Arc" visual aesthetic (semi-translucent glass panels, neon glows, dynamic concentric rings).

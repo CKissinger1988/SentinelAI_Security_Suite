@@ -1,4 +1,4 @@
-name: SentinelAI_Security_Core CI/CD
+name: SpartanAI_Security_Core CI/CD
 
 on:
   push:

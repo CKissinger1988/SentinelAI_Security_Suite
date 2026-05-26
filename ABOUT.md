@@ -1,6 +1,6 @@
-# SpartanAI AI Sovereign Security Suite (ASOC) - About and Deep Architecture
+# SpartanAI Sovereign Security Suite (ASOC) - About and Deep Architecture
 
-Welcome to the **SpartanAI AI Sovereign Security Suite (ASOC)**, a next-generation Autonomous Security Operations Center engineered for high-stakes defensive and offensive operations. This document provides a highly detailed overview of the system's philosophy, architecture, telemetry indicators, security mechanisms, and design decisions.
+Welcome to the **SpartanAI Sovereign Security Suite (ASOC)**, a next-generation Autonomous Security Operations Center engineered for high-stakes defensive and offensive operations. This document provides a highly detailed overview of the system's philosophy, architecture, telemetry indicators, security mechanisms, and design decisions.
 
 ---
 

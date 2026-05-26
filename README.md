@@ -1,6 +1,6 @@
-# SpartanAI AI Sovereign Security Suite (ASOC) v2.5.0 (Server Build)
+# SpartanAI Sovereign Security Suite (ASOC) v2.5.0 (Server Build)
 
-**The SpartanAI AI Sovereign Security Suite** is a high-performance, autonomous security operations center (ASOC) engineered for professional-grade offensive and defensive missions. This build is hardened for full server deployments with systemd support, zero-trust API boundaries, and a virtualized Hardware Security Module (HSM).
+**The SpartanAI Sovereign Security Suite** is a high-performance, autonomous security operations center (ASOC) engineered for professional-grade offensive and defensive missions. This build is hardened for full server deployments with systemd support, zero-trust API boundaries, and a virtualized Hardware Security Module (HSM).
 
 ---
 

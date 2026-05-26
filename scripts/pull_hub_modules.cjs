@@ -7,10 +7,10 @@ const DEST = 'C:\\GitHub\\SpartanAI_Security_Core\\hub_modules';
 if (!fs.existsSync(DEST)) fs.mkdirSync(DEST, { recursive: true });
 
 const modules = [
-  { id: 'spartan-core',         file: 'spartan.py',              src: 'backend/core/spartan.py' },
+  { id: 'spartan-core',         file: 'spartanai.py',              src: 'backend/core/spartan.py' },
   { id: 'sovereign-defense',     file: 'sovereign_defense.py',     src: 'backend/core/services/sovereign_defense.py' },
   { id: 'self-healing-mesh',     file: 'self_healing_mesh.py',     src: 'backend/core/services/self_healing_mesh.py' },
-  { id: 'self-healing-spartan', file: 'self_healing_spartan.py', src: 'backend/core/services/self_healing_spartan.py' },
+  { id: 'self-healing-spartan', file: 'self_healing_spartanai.py', src: 'backend/core/services/self_healing_spartan.py' },
   { id: 'threat-hunter',         file: 'threat_hunter.py',         src: 'backend/core/services/threat_hunter.py' },
   { id: 'flash-loan-guard',      file: 'flash_loan_guard.py',      src: 'backend/core/CognitiveCore/flash_loan_guard.py' },
   { id: 'security-shield',       file: 'security_shield.py',       src: 'backend/core/CognitiveCore/security_shield.py' },
