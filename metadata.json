@@ -1,0 +1,6 @@
+{
+  "name": "SentinelAI Security Suite",
+  "description": "An enterprise endpoint security dashboard featuring real-time ML threat detection, automated vulnerability patching simulator, centralized logs, SIEM integration, RBAC, and AI-powered compliance IT audit reporting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
