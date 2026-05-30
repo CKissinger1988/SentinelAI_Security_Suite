@@ -370,12 +370,10 @@ const authenticateJWT = (
       },
     );
   } else {
-    res
-      .status(401)
-      .json({
-        error: "UNAUTHORIZED",
-        message: "Missing or malformed authentication token.",
-      });
+    res.status(401).json({
+      error: "UNAUTHORIZED",
+      message: "Missing or malformed authentication token.",
+    });
   }
 };
 
@@ -729,12 +727,10 @@ app.post("/api/auth/login", async (req, res) => {
     `[AUTH_FAIL] Login failure for '${email}' from ${ip} (attempt ${current.count + 1}/${LOGIN_LIMIT})`,
     "warning",
   );
-  res
-    .status(401)
-    .json({
-      error: "INVALID_CREDENTIALS",
-      message: "Authentication failed. Attempt logged.",
-    });
+  res.status(401).json({
+    error: "INVALID_CREDENTIALS",
+    message: "Authentication failed. Attempt logged.",
+  });
 });
 
 // --- WEBAUTHN AUTHENTICATION ---
@@ -1004,12 +1000,10 @@ app.post(
 
     // SecOps-Admin cannot escalate to 'critical' — only root (Creator) has that authority
     if (req.user?.role === "SecOps-Admin" && level === "critical") {
-      return res
-        .status(403)
-        .json({
-          error: "INSUFFICIENT_TIER",
-          message: "Only the Creator can set Critical threat level.",
-        });
+      return res.status(403).json({
+        error: "INSUFFICIENT_TIER",
+        message: "Only the Creator can set Critical threat level.",
+      });
     }
 
     const manualAlert = {
@@ -1901,13 +1895,11 @@ app.post("/api/adb/enable-wireless", authenticateJWT, async (req, res) => {
     const deviceIp = ipMatch ? ipMatch[1] : null;
 
     if (!deviceIp) {
-      return res
-        .status(400)
-        .json({
-          error: "IP_NOT_FOUND",
-          message:
-            "Could not determine wireless IP address. Ensure device is on Wi-Fi.",
-        });
+      return res.status(400).json({
+        error: "IP_NOT_FOUND",
+        message:
+          "Could not determine wireless IP address. Ensure device is on Wi-Fi.",
+      });
     }
 
     // 3. Establish the wireless connection
@@ -2201,12 +2193,10 @@ app.get("/api/ssh-keys", authenticateJWT, (req, res) => {
 app.post("/api/ssh-keys", authenticateJWT, (req, res) => {
   const { label, publicKey } = req.body;
   if (!label || !publicKey) {
-    return res
-      .status(400)
-      .json({
-        error: "MISSING_FIELDS",
-        message: "Label and public key are required.",
-      });
+    return res.status(400).json({
+      error: "MISSING_FIELDS",
+      message: "Label and public key are required.",
+    });
   }
 
   try {
@@ -2225,12 +2215,10 @@ app.post("/api/ssh-keys", authenticateJWT, (req, res) => {
     res.status(201).json({ success: true, key: newKey });
   } catch (err) {
     console.error("Add SSH key error:", err);
-    res
-      .status(500)
-      .json({
-        error: "ADD_SSH_KEY_FAILURE",
-        message: "Failed to encrypt and store SSH key.",
-      });
+    res.status(500).json({
+      error: "ADD_SSH_KEY_FAILURE",
+      message: "Failed to encrypt and store SSH key.",
+    });
   }
 });
 
@@ -2244,37 +2232,31 @@ app.delete("/api/ssh-keys/:id", authenticateJWT, (req, res) => {
   if (inMemoryStorage.sshKeys.length < initialLength) {
     res.json({ success: true, message: "SSH key deleted successfully." });
   } else {
-    res
-      .status(404)
-      .json({
-        error: "KEY_NOT_FOUND",
-        message: "SSH key with provided ID not found.",
-      });
+    res.status(404).json({
+      error: "KEY_NOT_FOUND",
+      message: "SSH key with provided ID not found.",
+    });
   }
 });
 
 app.post("/api/ssh-keys/decrypt", authenticateJWT, (req, res) => {
   const { encryptedKey } = req.body;
   if (!encryptedKey) {
-    return res
-      .status(400)
-      .json({
-        error: "MISSING_ENCRYPTED_KEY",
-        message: "Encrypted key is required for decryption.",
-      });
+    return res.status(400).json({
+      error: "MISSING_ENCRYPTED_KEY",
+      message: "Encrypted key is required for decryption.",
+    });
   }
   try {
     const decrypted = hsm.decrypt(encryptedKey);
     res.json({ success: true, decryptedKey: decrypted });
   } catch (err) {
     console.error("Decrypt SSH key error:", err);
-    res
-      .status(500)
-      .json({
-        error: "DECRYPT_SSH_KEY_FAILURE",
-        message:
-          "Failed to decrypt SSH key. Master key mismatch or corrupted data.",
-      });
+    res.status(500).json({
+      error: "DECRYPT_SSH_KEY_FAILURE",
+      message:
+        "Failed to decrypt SSH key. Master key mismatch or corrupted data.",
+    });
   }
 });
 
@@ -2303,12 +2285,10 @@ app.post("/api/enclave/upload", (req, res) => {
 
   const { filename, fileContentBase64, fileSize } = req.body;
   if (!filename || !fileContentBase64 || typeof fileSize !== "number") {
-    return res
-      .status(400)
-      .json({
-        error: "MISSING_FIELDS",
-        message: "Filename, fileContentBase64, and fileSize are required.",
-      });
+    return res.status(400).json({
+      error: "MISSING_FIELDS",
+      message: "Filename, fileContentBase64, and fileSize are required.",
+    });
   }
 
   try {
@@ -2330,20 +2310,16 @@ app.post("/api/enclave/upload", (req, res) => {
       `ENCLAVE: File '${filename}' encrypted and stored in sovereign enclave.`,
       "success",
     );
-    res
-      .status(201)
-      .json({
-        success: true,
-        file: { id: newFile.id, filename: newFile.filename },
-      });
+    res.status(201).json({
+      success: true,
+      file: { id: newFile.id, filename: newFile.filename },
+    });
   } catch (err) {
     console.error("Enclave upload error:", err);
-    res
-      .status(500)
-      .json({
-        error: "ENCLAVE_UPLOAD_FAILURE",
-        message: "Failed to encrypt and store file.",
-      });
+    res.status(500).json({
+      error: "ENCLAVE_UPLOAD_FAILURE",
+      message: "Failed to encrypt and store file.",
+    });
   }
 });
 
@@ -2412,12 +2388,10 @@ app.post("/api/enclave/files/decrypt", (req, res) => {
     });
   } catch (err) {
     console.error("Enclave decrypt error:", err);
-    res
-      .status(500)
-      .json({
-        error: "ENCLAVE_DECRYPT_FAILURE",
-        message: "Failed to decrypt enclave file.",
-      });
+    res.status(500).json({
+      error: "ENCLAVE_DECRYPT_FAILURE",
+      message: "Failed to decrypt enclave file.",
+    });
   }
 });
 
