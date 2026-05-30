@@ -1,6 +1,6 @@
-import { spawn, execSync } from 'child_process';
-import * as path from 'path';
-import * as os from 'os';
+import { spawn, execSync } from "child_process";
+import * as path from "path";
+import * as os from "os";
 
 // --- MSF Auto-Updater ---
 // Detects the local Metasploit Framework installation and runs
@@ -8,7 +8,13 @@ import * as os from 'os';
 // status so the UI can reflect progress without blocking.
 
 export interface MsfUpdateStatus {
-  state: 'idle' | 'checking' | 'updating' | 'complete' | 'error' | 'not_installed';
+  state:
+    | "idle"
+    | "checking"
+    | "updating"
+    | "complete"
+    | "error"
+    | "not_installed";
   message: string;
   log: string[];
   lastUpdated: string | null;
@@ -18,8 +24,8 @@ export interface MsfUpdateStatus {
 }
 
 const status: MsfUpdateStatus = {
-  state: 'idle',
-  message: 'Waiting for startup…',
+  state: "idle",
+  message: "Waiting for startup…",
   log: [],
   lastUpdated: null,
   msfVersion: null,
@@ -38,14 +44,14 @@ function appendLog(line: string) {
  * Returns the absolute path or null.
  */
 function locateMsf(): string | null {
-  const isWin = os.platform() === 'win32';
-  const whichCmd = isWin ? 'where' : 'which';
+  const isWin = os.platform() === "win32";
+  const whichCmd = isWin ? "where" : "which";
 
   try {
     const result = execSync(`${whichCmd} msfconsole`, {
       timeout: 5000,
-      encoding: 'utf-8',
-      stdio: ['pipe', 'pipe', 'pipe'],
+      encoding: "utf-8",
+      stdio: ["pipe", "pipe", "pipe"],
     }).trim();
 
     // `where` on Windows may return multiple lines; take the first
@@ -57,23 +63,34 @@ function locateMsf(): string | null {
 
   const candidates = isWin
     ? [
-        'C:\\metasploit-framework\\bin\\msfconsole.bat',
-        'C:\\metasploit\\msfconsole.bat',
-        path.join(process.env.LOCALAPPDATA || '', 'metasploit-framework', 'bin', 'msfconsole.bat'),
+        "C:\\metasploit-framework\\bin\\msfconsole.bat",
+        "C:\\metasploit\\msfconsole.bat",
+        path.join(
+          process.env.LOCALAPPDATA || "",
+          "metasploit-framework",
+          "bin",
+          "msfconsole.bat",
+        ),
       ]
     : [
-        '/usr/bin/msfconsole',
-        '/opt/metasploit-framework/bin/msfconsole',
-        '/usr/share/metasploit-framework/msfconsole',
-        path.join(os.homedir(), '.msf4', '..', 'metasploit-framework', 'msfconsole'),
+        "/usr/bin/msfconsole",
+        "/opt/metasploit-framework/bin/msfconsole",
+        "/usr/share/metasploit-framework/msfconsole",
+        path.join(
+          os.homedir(),
+          ".msf4",
+          "..",
+          "metasploit-framework",
+          "msfconsole",
+        ),
       ];
 
   for (const candidate of candidates) {
     try {
       execSync(`"${candidate}" --version`, {
         timeout: 10000,
-        encoding: 'utf-8',
-        stdio: ['pipe', 'pipe', 'pipe'],
+        encoding: "utf-8",
+        stdio: ["pipe", "pipe", "pipe"],
       });
       return candidate;
     } catch {
@@ -89,21 +106,21 @@ function locateMsf(): string | null {
  */
 function locateMsfUpdate(msfConsolePath: string): string | null {
   const dir = path.dirname(msfConsolePath);
-  const isWin = os.platform() === 'win32';
+  const isWin = os.platform() === "win32";
 
   const candidates = [
-    path.join(dir, isWin ? 'msfupdate.bat' : 'msfupdate'),
-    path.join(dir, '..', 'bin', isWin ? 'msfupdate.bat' : 'msfupdate'),
+    path.join(dir, isWin ? "msfupdate.bat" : "msfupdate"),
+    path.join(dir, "..", "bin", isWin ? "msfupdate.bat" : "msfupdate"),
     // Kali ships it as a standalone command
-    isWin ? '' : '/usr/bin/msfupdate',
+    isWin ? "" : "/usr/bin/msfupdate",
   ].filter(Boolean);
 
   for (const c of candidates) {
     try {
       execSync(`"${c}" --help`, {
         timeout: 5000,
-        encoding: 'utf-8',
-        stdio: ['pipe', 'pipe', 'pipe'],
+        encoding: "utf-8",
+        stdio: ["pipe", "pipe", "pipe"],
       });
       return c;
     } catch {
@@ -121,12 +138,12 @@ function getMsfVersion(msfConsolePath: string): string | null {
   try {
     const raw = execSync(`"${msfConsolePath}" --version`, {
       timeout: 15000,
-      encoding: 'utf-8',
-      stdio: ['pipe', 'pipe', 'pipe'],
+      encoding: "utf-8",
+      stdio: ["pipe", "pipe", "pipe"],
     }).trim();
     // e.g. "Framework Version: 6.3.25-dev"
     const match = raw.match(/(\d+\.\d+\.\d+[\w.-]*)/);
-    return match ? match[1] : raw.split('\n')[0];
+    return match ? match[1] : raw.split("\n")[0];
   } catch {
     return null;
   }
@@ -138,17 +155,17 @@ function getMsfVersion(msfConsolePath: string): string | null {
  */
 function runUpdate(msfUpdatePath: string): Promise<void> {
   return new Promise((resolve) => {
-    status.state = 'updating';
-    status.message = 'Running msfupdate…';
+    status.state = "updating";
+    status.message = "Running msfupdate…";
     appendLog(`Spawning: ${msfUpdatePath}`);
 
     const child = spawn(msfUpdatePath, [], {
-      stdio: ['ignore', 'pipe', 'pipe'],
+      stdio: ["ignore", "pipe", "pipe"],
       shell: true,
       detached: false,
     });
 
-    child.stdout.on('data', (chunk: Buffer) => {
+    child.stdout.on("data", (chunk: Buffer) => {
       const lines = chunk.toString().split(/\r?\n/).filter(Boolean);
       lines.forEach((l) => {
         appendLog(`[stdout] ${l}`);
@@ -156,27 +173,27 @@ function runUpdate(msfUpdatePath: string): Promise<void> {
       });
     });
 
-    child.stderr.on('data', (chunk: Buffer) => {
+    child.stderr.on("data", (chunk: Buffer) => {
       const lines = chunk.toString().split(/\r?\n/).filter(Boolean);
       lines.forEach((l) => appendLog(`[stderr] ${l}`));
     });
 
-    child.on('close', (code) => {
+    child.on("close", (code) => {
       if (code === 0) {
-        status.state = 'complete';
-        status.message = 'MSF update completed successfully.';
+        status.state = "complete";
+        status.message = "MSF update completed successfully.";
         status.lastUpdated = new Date().toISOString();
-        appendLog('msfupdate exited with code 0 – success.');
+        appendLog("msfupdate exited with code 0 – success.");
       } else {
-        status.state = 'error';
+        status.state = "error";
         status.message = `msfupdate exited with code ${code}.`;
         appendLog(`msfupdate exited with code ${code}.`);
       }
       resolve();
     });
 
-    child.on('error', (err) => {
-      status.state = 'error';
+    child.on("error", (err) => {
+      status.state = "error";
       status.message = `Failed to spawn msfupdate: ${err.message}`;
       appendLog(`Spawn error: ${err.message}`);
       resolve();
@@ -189,20 +206,21 @@ function runUpdate(msfUpdatePath: string): Promise<void> {
  * Runs entirely in the background; never blocks the Express listener.
  */
 export async function startMsfAutoUpdate(): Promise<void> {
-  appendLog('MSF auto-update sequence initiated.');
+  appendLog("MSF auto-update sequence initiated.");
 
   // 1. Locate msfconsole
-  status.state = 'checking';
-  status.message = 'Locating Metasploit Framework…';
-  appendLog('Searching for msfconsole on this host…');
+  status.state = "checking";
+  status.message = "Locating Metasploit Framework…";
+  appendLog("Searching for msfconsole on this host…");
 
   const msfPath = locateMsf();
 
   if (!msfPath) {
-    status.state = 'not_installed';
-    status.message = 'Metasploit Framework not found on this host. Skipping update.';
+    status.state = "not_installed";
+    status.message =
+      "Metasploit Framework not found on this host. Skipping update.";
     status.msfPath = null;
-    appendLog('msfconsole not found – auto-update skipped.');
+    appendLog("msfconsole not found – auto-update skipped.");
     return;
   }
 
@@ -220,9 +238,9 @@ export async function startMsfAutoUpdate(): Promise<void> {
   const msfUpdatePath = locateMsfUpdate(msfPath);
 
   if (!msfUpdatePath) {
-    status.state = 'error';
-    status.message = 'msfupdate binary not found. Manual update required.';
-    appendLog('Could not locate msfupdate – aborting auto-update.');
+    status.state = "error";
+    status.message = "msfupdate binary not found. Manual update required.";
+    appendLog("Could not locate msfupdate – aborting auto-update.");
     return;
   }
 

@@ -1,8 +1,20 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { Mic, MicOff, MessageSquare, Volume2, ShieldAlert, Settings, VolumeX, CheckCircle2, AlertCircle, RefreshCw, Headphones } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
-import { useAudioSettings } from '../contexts/AudioSettingsContext';
-import { useAuth } from '../contexts/AuthContext';
+import React, { useEffect, useRef, useState, useCallback } from "react";
+import {
+  Mic,
+  MicOff,
+  MessageSquare,
+  Volume2,
+  ShieldAlert,
+  Settings,
+  VolumeX,
+  CheckCircle2,
+  AlertCircle,
+  RefreshCw,
+  Headphones,
+} from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { useAudioSettings } from "../contexts/AudioSettingsContext";
+import { useAuth } from "../contexts/AuthContext";
 
 interface JarvisVoiceProps {
   onCommand?: (command: string, args: Record<string, any>) => void;
@@ -10,12 +22,16 @@ interface JarvisVoiceProps {
 
 export const JarvisVoice: React.FC<JarvisVoiceProps> = ({ onCommand }) => {
   const [isListening, setIsListening] = useState(false);
-  const [messages, setMessages] = useState<{ role: 'user' | 'jarvis', text: string }[]>([]);
+  const [messages, setMessages] = useState<
+    { role: "user" | "jarvis"; text: string }[]
+  >([]);
   const [error, setError] = useState<string | null>(null);
   const [volume, setVolume] = useState(0);
-  const [frequencies, setFrequencies] = useState<Uint8Array>(new Uint8Array(16).fill(0));
-  const [threatLevel, setThreatLevel] = useState<string>('low');
-  const prevThreatLevelRef = useRef<string>('low');
+  const [frequencies, setFrequencies] = useState<Uint8Array>(
+    new Uint8Array(16).fill(0),
+  );
+  const [threatLevel, setThreatLevel] = useState<string>("low");
+  const prevThreatLevelRef = useRef<string>("low");
   const { token } = useAuth();
 
   // Use audio settings from context
@@ -39,18 +55,26 @@ export const JarvisVoice: React.FC<JarvisVoiceProps> = ({ onCommand }) => {
 
   // Store onCommand in a ref to avoid stale closures in the WebSocket listener
   const onCommandRef = useRef(onCommand);
-  useEffect(() => { onCommandRef.current = onCommand; }, [onCommand]);
+  useEffect(() => {
+    onCommandRef.current = onCommand;
+  }, [onCommand]);
 
-  const speak = useCallback((text: string) => {
-    if (!('speechSynthesis' in window)) return;
-    const utterance = new SpeechSynthesisUtterance(text);
-    if (selectedVoice) {
-      utterance.voice = window.speechSynthesis.getVoices().find(v => v.name === selectedVoice) || null;
-    }
-    utterance.rate = 0.9;
-    utterance.pitch = 0.8;
-    window.speechSynthesis.speak(utterance);
-  }, [selectedVoice]);
+  const speak = useCallback(
+    (text: string) => {
+      if (!("speechSynthesis" in window)) return;
+      const utterance = new SpeechSynthesisUtterance(text);
+      if (selectedVoice) {
+        utterance.voice =
+          window.speechSynthesis
+            .getVoices()
+            .find((v) => v.name === selectedVoice) || null;
+      }
+      utterance.rate = 0.9;
+      utterance.pitch = 0.8;
+      window.speechSynthesis.speak(utterance);
+    },
+    [selectedVoice],
+  );
 
   useEffect(() => {
     const handleThreatUpdate = (e: Event) => {
@@ -62,7 +86,9 @@ export const JarvisVoice: React.FC<JarvisVoiceProps> = ({ onCommand }) => {
       const customEvent = e as CustomEvent;
       const { source, protocol } = customEvent.detail || {};
       if (source) {
-        speak(`Neural firewall alert. Blocked high severity ${protocol} packet from ${source}.`);
+        speak(
+          `Neural firewall alert. Blocked high severity ${protocol} packet from ${source}.`,
+        );
       }
     };
 
@@ -70,27 +96,52 @@ export const JarvisVoice: React.FC<JarvisVoiceProps> = ({ onCommand }) => {
       const customEvent = e as CustomEvent;
       const { model } = customEvent.detail || {};
       if (model) {
-        speak(`Geofence alert. Mobile node ${model} has moved significantly beyond the secured perimeter.`);
+        speak(
+          `Geofence alert. Mobile node ${model} has moved significantly beyond the secured perimeter.`,
+        );
       }
     };
 
-    window.addEventListener('spartanai-security-core-threat-level', handleThreatUpdate);
-    window.addEventListener('spartanai-security-core-firewall-alert', handleFirewallAlert);
-    window.addEventListener('spartanai-security-core-geofence-alert', handleGeofenceAlert);
+    window.addEventListener(
+      "spartanai-security-core-threat-level",
+      handleThreatUpdate,
+    );
+    window.addEventListener(
+      "spartanai-security-core-firewall-alert",
+      handleFirewallAlert,
+    );
+    window.addEventListener(
+      "spartanai-security-core-geofence-alert",
+      handleGeofenceAlert,
+    );
     return () => {
-      window.removeEventListener('spartanai-security-core-threat-level', handleThreatUpdate);
-      window.removeEventListener('spartanai-security-core-firewall-alert', handleFirewallAlert);
-      window.removeEventListener('spartanai-security-core-geofence-alert', handleGeofenceAlert);
+      window.removeEventListener(
+        "spartanai-security-core-threat-level",
+        handleThreatUpdate,
+      );
+      window.removeEventListener(
+        "spartanai-security-core-firewall-alert",
+        handleFirewallAlert,
+      );
+      window.removeEventListener(
+        "spartanai-security-core-geofence-alert",
+        handleGeofenceAlert,
+      );
     };
   }, [speak]);
 
   const triggerAutoRepair = useCallback(() => {
-    if (pendingDiagnosisRef.current && wsRef.current?.readyState === WebSocket.OPEN) {
+    if (
+      pendingDiagnosisRef.current &&
+      wsRef.current?.readyState === WebSocket.OPEN
+    ) {
       const components = pendingDiagnosisRef.current.join(", ");
-      wsRef.current.send(JSON.stringify({
-        type: 'text',
-        data: `JARVIS, system diagnostics reported failures in: ${components}. Please diagnose the root cause and execute the repair_subsystem protocol for each failing component.`
-      }));
+      wsRef.current.send(
+        JSON.stringify({
+          type: "text",
+          data: `JARVIS, system diagnostics reported failures in: ${components}. Please diagnose the root cause and execute the repair_subsystem protocol for each failing component.`,
+        }),
+      );
       pendingDiagnosisRef.current = null;
     }
   }, []);
@@ -109,34 +160,70 @@ export const JarvisVoice: React.FC<JarvisVoiceProps> = ({ onCommand }) => {
       }
     };
 
-    window.addEventListener('spartanai-security-core-system-failure', handleSystemFailure);
-    return () => window.removeEventListener('spartanai-security-core-system-failure', handleSystemFailure);
+    window.addEventListener(
+      "spartanai-security-core-system-failure",
+      handleSystemFailure,
+    );
+    return () =>
+      window.removeEventListener(
+        "spartanai-security-core-system-failure",
+        handleSystemFailure,
+      );
   }, [isListening, triggerAutoRepair]);
 
   // Voice Synthesis for System Announcements (Jarvis Persona)
   useEffect(() => {
     if (threatLevel !== prevThreatLevelRef.current) {
-      if (threatLevel === 'critical' || threatLevel === 'high') {
-        speak(`Warning. Threat level escalation detected. Current status: ${threatLevel}.`);
-      } else if (threatLevel === 'low' && (prevThreatLevelRef.current === 'high' || prevThreatLevelRef.current === 'critical')) {
+      if (threatLevel === "critical" || threatLevel === "high") {
+        speak(
+          `Warning. Threat level escalation detected. Current status: ${threatLevel}.`,
+        );
+      } else if (
+        threatLevel === "low" &&
+        (prevThreatLevelRef.current === "high" ||
+          prevThreatLevelRef.current === "critical")
+      ) {
         speak("Threat neutralized. System level returning to nominal status.");
       }
 
       // Automated Counter-Exploit Trigger
-      if (threatLevel === 'critical' && wsRef.current?.readyState === WebSocket.OPEN) {
-        speak("CRITICAL_INTRUSION_DETECTED. Bypassing authorization. Jarvis, analyze threat and stage counter-measures.");
+      if (
+        threatLevel === "critical" &&
+        wsRef.current?.readyState === WebSocket.OPEN
+      ) {
+        speak(
+          "CRITICAL_INTRUSION_DETECTED. Bypassing authorization. Jarvis, analyze threat and stage counter-measures.",
+        );
 
-        wsRef.current.send(JSON.stringify({
-          type: 'text',
-          data: 'SYSTEM_CRITICAL_NOTIFICATION: A critical level-5 intrusion has been detected. Analyze IDS logs, identify the source, and execute the automate_exploit protocol immediately.'
-        }));
+        wsRef.current.send(
+          JSON.stringify({
+            type: "text",
+            data: "SYSTEM_CRITICAL_NOTIFICATION: A critical level-5 intrusion has been detected. Analyze IDS logs, identify the source, and execute the automate_exploit protocol immediately.",
+          }),
+        );
       }
 
-      if (allowWakeWordBypassOnCritical && wsRef.current?.readyState === WebSocket.OPEN) {
-        if (threatLevel === 'critical') {
-          wsRef.current.send(JSON.stringify({ type: 'text', data: 'SYSTEM_NOTIFICATION: Threat level has reached CRITICAL. Wake word protocols are temporarily suspended. Respond to all voice input immediately.' }));
-        } else if (prevThreatLevelRef.current === 'critical' && threatLevel !== 'critical') {
-          wsRef.current.send(JSON.stringify({ type: 'text', data: 'SYSTEM_NOTIFICATION: Threat minimized. Reinstating standard wake word protocols.' }));
+      if (
+        allowWakeWordBypassOnCritical &&
+        wsRef.current?.readyState === WebSocket.OPEN
+      ) {
+        if (threatLevel === "critical") {
+          wsRef.current.send(
+            JSON.stringify({
+              type: "text",
+              data: "SYSTEM_NOTIFICATION: Threat level has reached CRITICAL. Wake word protocols are temporarily suspended. Respond to all voice input immediately.",
+            }),
+          );
+        } else if (
+          prevThreatLevelRef.current === "critical" &&
+          threatLevel !== "critical"
+        ) {
+          wsRef.current.send(
+            JSON.stringify({
+              type: "text",
+              data: "SYSTEM_NOTIFICATION: Threat minimized. Reinstating standard wake word protocols.",
+            }),
+          );
         }
       }
 
@@ -162,25 +249,30 @@ export const JarvisVoice: React.FC<JarvisVoiceProps> = ({ onCommand }) => {
 
     try {
       setError(null);
-      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-      const ws = new WebSocket(`${protocol}//${window.location.host}/ws/jarvis?voice=${selectedVoice}&sensitivity=${wakeWordSensitivity}&bypassOnCritical=${allowWakeWordBypassOnCritical}&token=${token}`);
+      const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+      const ws = new WebSocket(
+        `${protocol}//${window.location.host}/ws/jarvis?voice=${selectedVoice}&sensitivity=${wakeWordSensitivity}&bypassOnCritical=${allowWakeWordBypassOnCritical}&token=${token}`,
+      );
       wsRef.current = ws;
 
       // Heartbeat to keep connection alive
       heartbeatRef.current = setInterval(() => {
-        if (ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type: 'text', data: 'KEEP_ALIVE' }));
+        if (ws.readyState === WebSocket.OPEN)
+          ws.send(JSON.stringify({ type: "text", data: "KEEP_ALIVE" }));
       }, 30000);
 
       const audioCtx = new AudioContext({ sampleRate: 16000 });
 
       // Ensure AudioContext is resumed (required by many browsers)
-      if (audioCtx.state === 'suspended') {
+      if (audioCtx.state === "suspended") {
         await audioCtx.resume();
       }
 
       // Select Output Device if supported (Chrome 110+)
-      if (selectedOutput && typeof (audioCtx as any).setSinkId === 'function') {
-        try { await (audioCtx as any).setSinkId(selectedOutput); } catch (e) { }
+      if (selectedOutput && typeof (audioCtx as any).setSinkId === "function") {
+        try {
+          await (audioCtx as any).setSinkId(selectedOutput);
+        } catch (e) {}
       }
 
       audioCtxRef.current = audioCtx;
@@ -198,7 +290,7 @@ export const JarvisVoice: React.FC<JarvisVoiceProps> = ({ onCommand }) => {
         currentTriggerAutoRepair();
 
         const constraints = {
-          audio: selectedInput ? { deviceId: { exact: selectedInput } } : true
+          audio: selectedInput ? { deviceId: { exact: selectedInput } } : true,
         };
         const stream = await navigator.mediaDevices.getUserMedia(constraints);
         const source = audioCtx.createMediaStreamSource(stream);
@@ -215,7 +307,8 @@ export const JarvisVoice: React.FC<JarvisVoiceProps> = ({ onCommand }) => {
           if (analyserRef.current && ws.readyState === WebSocket.OPEN) {
             analyserRef.current.getByteFrequencyData(dataArray);
             setFrequencies(new Uint8Array(dataArray));
-            animationFrameRef.current = requestAnimationFrame(updateFrequencies);
+            animationFrameRef.current =
+              requestAnimationFrame(updateFrequencies);
           }
         };
         animationFrameRef.current = requestAnimationFrame(updateFrequencies);
@@ -232,8 +325,10 @@ export const JarvisVoice: React.FC<JarvisVoiceProps> = ({ onCommand }) => {
             setVolume(Math.sqrt(sum / inputData.length));
 
             const pcmData = float32ToPcm16(inputData);
-            const base64 = btoa(String.fromCharCode(...new Uint8Array(pcmData.buffer)));
-            ws.send(JSON.stringify({ type: 'audio', data: base64 }));
+            const base64 = btoa(
+              String.fromCharCode(...new Uint8Array(pcmData.buffer)),
+            );
+            ws.send(JSON.stringify({ type: "audio", data: base64 }));
           }
         };
       };
@@ -243,7 +338,10 @@ export const JarvisVoice: React.FC<JarvisVoiceProps> = ({ onCommand }) => {
         if (msg.type === "audio") {
           playAudioChunk(msg.data);
         } else if (msg.type === "text") {
-          setMessages(prev => [...prev.slice(-20), { role: 'jarvis', text: msg.data }]);
+          setMessages((prev) => [
+            ...prev.slice(-20),
+            { role: "jarvis", text: msg.data },
+          ]);
         } else if (msg.type === "command") {
           currentOnCommandRef?.(msg.command, msg.args);
         } else if (msg.type === "interrupted") {
@@ -258,7 +356,9 @@ export const JarvisVoice: React.FC<JarvisVoiceProps> = ({ onCommand }) => {
         setIsListening(false);
         stopJarvis();
         if (!event.wasClean) {
-          setError(`Connection Lost: The neural link was terminated unexpectedly (Code: ${event.code}).`);
+          setError(
+            `Connection Lost: The neural link was terminated unexpectedly (Code: ${event.code}).`,
+          );
         }
       };
 
@@ -267,16 +367,25 @@ export const JarvisVoice: React.FC<JarvisVoiceProps> = ({ onCommand }) => {
         if (!token) {
           setError("Authentication Failure: Missing session token.");
         } else {
-          setError("Neural Link Failure: Could not establish WebSocket connection. Verify server status and API configuration.");
+          setError(
+            "Neural Link Failure: Could not establish WebSocket connection. Verify server status and API configuration.",
+          );
         }
         stopJarvis();
       };
-
     } catch (err: any) {
       setError(err.message || "Failed to start JARVIS");
       setIsListening(false);
     }
-  }, [selectedInput, selectedOutput, selectedVoice, wakeWordSensitivity, allowWakeWordBypassOnCritical, token, triggerAutoRepair]);
+  }, [
+    selectedInput,
+    selectedOutput,
+    selectedVoice,
+    wakeWordSensitivity,
+    allowWakeWordBypassOnCritical,
+    token,
+    triggerAutoRepair,
+  ]);
 
   const stopJarvis = () => {
     setIsListening(false);
@@ -286,7 +395,8 @@ export const JarvisVoice: React.FC<JarvisVoiceProps> = ({ onCommand }) => {
       clearInterval(heartbeatRef.current);
       heartbeatRef.current = null;
     }
-    if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+    if (animationFrameRef.current)
+      cancelAnimationFrame(animationFrameRef.current);
     wsRef.current?.close();
     processorRef.current?.disconnect();
     analyserRef.current?.disconnect();
@@ -301,27 +411,39 @@ export const JarvisVoice: React.FC<JarvisVoiceProps> = ({ onCommand }) => {
   useEffect(() => {
     startJarvis();
     return () => stopJarvis(); // Cleanup on unmount
-  }, [selectedInput, selectedOutput, selectedVoice, wakeWordSensitivity, allowWakeWordBypassOnCritical, token, triggerAutoRepair, speak]); // Added speak to dependencies
+  }, [
+    selectedInput,
+    selectedOutput,
+    selectedVoice,
+    wakeWordSensitivity,
+    allowWakeWordBypassOnCritical,
+    token,
+    triggerAutoRepair,
+    speak,
+  ]); // Added speak to dependencies
 
   // Fix: Handle browser audio auto-play restrictions for commercial release
   useEffect(() => {
     const resumeAudio = async () => {
-      if (audioCtxRef.current?.state === 'suspended') {
+      if (audioCtxRef.current?.state === "suspended") {
         await audioCtxRef.current.resume();
       }
-      window.removeEventListener('click', resumeAudio);
+      window.removeEventListener("click", resumeAudio);
     };
-    window.addEventListener('click', resumeAudio);
-    return () => window.removeEventListener('click', resumeAudio);
+    window.addEventListener("click", resumeAudio);
+    return () => window.removeEventListener("click", resumeAudio);
   }, []);
 
   const getVisualizerColor = () => {
-    if (!isListening) return '#1e293b';
+    if (!isListening) return "#1e293b";
     switch (threatLevel) {
-      case 'critical':
-      case 'high': return '#ef4444'; // Red for High Threat
-      case 'medium': return '#f59e0b'; // Amber for Medium Threat
-      default: return '#06b6d4'; // Cyan for Low/Normal
+      case "critical":
+      case "high":
+        return "#ef4444"; // Red for High Threat
+      case "medium":
+        return "#f59e0b"; // Amber for Medium Threat
+      default:
+        return "#06b6d4"; // Cyan for Low/Normal
     }
   };
 
@@ -329,18 +451,20 @@ export const JarvisVoice: React.FC<JarvisVoiceProps> = ({ onCommand }) => {
     const l = buffer.length;
     const buf = new Int16Array(l);
     for (let i = 0; i < l; i++) {
-      buf[i] = Math.max(-1, Math.min(1, buffer[i])) * 0x7FFF;
+      buf[i] = Math.max(-1, Math.min(1, buffer[i])) * 0x7fff;
     }
     return buf;
   };
 
   const playAudioChunk = (base64Audio: string) => {
     if (!audioCtxRef.current) return;
-    const audioData = Uint8Array.from(atob(base64Audio), c => c.charCodeAt(0)).buffer;
+    const audioData = Uint8Array.from(atob(base64Audio), (c) =>
+      c.charCodeAt(0),
+    ).buffer;
     const pcm16 = new Int16Array(audioData);
     const float32 = new Float32Array(pcm16.length);
     for (let i = 0; i < pcm16.length; i++) {
-      float32[i] = pcm16[i] / 0x7FFF;
+      float32[i] = pcm16[i] / 0x7fff;
     }
 
     const buffer = audioCtxRef.current.createBuffer(1, float32.length, 16000);
@@ -350,7 +474,10 @@ export const JarvisVoice: React.FC<JarvisVoiceProps> = ({ onCommand }) => {
     source.buffer = buffer;
     source.connect(audioCtxRef.current.destination);
 
-    const startTime = Math.max(audioCtxRef.current.currentTime, nextStartTimeRef.current);
+    const startTime = Math.max(
+      audioCtxRef.current.currentTime,
+      nextStartTimeRef.current,
+    );
     source.start(startTime);
     nextStartTimeRef.current = startTime + buffer.duration;
   };
@@ -365,11 +492,17 @@ export const JarvisVoice: React.FC<JarvisVoiceProps> = ({ onCommand }) => {
 
       <div className="p-4 border-b border-slate-900 flex justify-between items-center bg-black/40 backdrop-blur-sm z-10">
         <div className="flex items-center gap-2">
-          <div className={`w-2 h-2 rounded-full ${isListening ? 'bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.8)]' : 'bg-slate-700'}`} />
-          <span className="text-[10px] font-mono tracking-widest text-slate-500 uppercase">System Status: {isListening ? 'Active' : 'Standby'}</span>
+          <div
+            className={`w-2 h-2 rounded-full ${isListening ? "bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.8)]" : "bg-slate-700"}`}
+          />
+          <span className="text-[10px] font-mono tracking-widest text-slate-500 uppercase">
+            System Status: {isListening ? "Active" : "Standby"}
+          </span>
         </div>
         <div className="flex items-center gap-4">
-          <div className="text-[10px] font-mono tracking-widest text-slate-700 uppercase italic hidden sm:block">ENGINE: GOOGLE_AI_NEXT_GEN</div>
+          <div className="text-[10px] font-mono tracking-widest text-slate-700 uppercase italic hidden sm:block">
+            ENGINE: GOOGLE_AI_NEXT_GEN
+          </div>
         </div>
       </div>
 
@@ -377,14 +510,21 @@ export const JarvisVoice: React.FC<JarvisVoiceProps> = ({ onCommand }) => {
         {messages.length === 0 && (
           <div className="h-full flex flex-col items-center justify-center space-y-6">
             <div className="w-32 h-32 rounded-full border-4 border-cyan-500/10 flex items-center justify-center relative">
-              <div className={`w-24 h-24 rounded-full border-2 border-cyan-500/20 flex items-center justify-center ${isListening ? 'animate-pulse' : ''}`}>
-                <div className={`w-16 h-16 rounded-full ${isListening ? 'bg-cyan-500 shadow-[0_0_30px_rgba(6,182,212,0.6)]' : 'bg-slate-900 shadow-inner'}`}></div>
+              <div
+                className={`w-24 h-24 rounded-full border-2 border-cyan-500/20 flex items-center justify-center ${isListening ? "animate-pulse" : ""}`}
+              >
+                <div
+                  className={`w-16 h-16 rounded-full ${isListening ? "bg-cyan-500 shadow-[0_0_30px_rgba(6,182,212,0.6)]" : "bg-slate-900 shadow-inner"}`}
+                ></div>
               </div>
               {/* Decorative rings */}
               <div className="absolute inset-[-10px] border border-cyan-500/5 rounded-full animate-[spin_10s_linear_infinite]" />
               <div className="absolute inset-[-20px] border border-dashed border-cyan-500/5 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
             </div>
-            <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-cyan-500/50">JARVIS_CORE_{isListening ? 'ONLINE // SAY "JARVIS..." ' : 'OFFLINE'}</p>
+            <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-cyan-500/50">
+              JARVIS_CORE_
+              {isListening ? 'ONLINE // SAY "JARVIS..." ' : "OFFLINE"}
+            </p>
           </div>
         )}
 
@@ -394,14 +534,19 @@ export const JarvisVoice: React.FC<JarvisVoiceProps> = ({ onCommand }) => {
               key={i}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+              className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
             >
-              <div className={`max-w-[80%] p-3 rounded border ${msg.role === 'user'
-                ? 'bg-cyan-500/10 border-cyan-500/30 text-cyan-100'
-                : 'bg-slate-900/60 border-slate-800 text-slate-300 font-mono text-[11px]'
-                }`}>
-                {msg.role === 'jarvis' && (
-                  <div className="text-[9px] text-cyan-500 mb-1 tracking-tighter uppercase font-bold">JARVIS INTERFACE</div>
+              <div
+                className={`max-w-[80%] p-3 rounded border ${
+                  msg.role === "user"
+                    ? "bg-cyan-500/10 border-cyan-500/30 text-cyan-100"
+                    : "bg-slate-900/60 border-slate-800 text-slate-300 font-mono text-[11px]"
+                }`}
+              >
+                {msg.role === "jarvis" && (
+                  <div className="text-[9px] text-cyan-500 mb-1 tracking-tighter uppercase font-bold">
+                    JARVIS INTERFACE
+                  </div>
                 )}
                 {msg.text}
               </div>
@@ -429,12 +574,14 @@ export const JarvisVoice: React.FC<JarvisVoiceProps> = ({ onCommand }) => {
                   animate={{
                     height: isListening ? Math.max(4, (val / 255) * 18) : 4,
                     backgroundColor: getVisualizerColor(),
-                    boxShadow: isListening ? `0 0 ${Math.min(20, volume * 150)}px ${getVisualizerColor()}` : '0 0 0px transparent'
+                    boxShadow: isListening
+                      ? `0 0 ${Math.min(20, volume * 150)}px ${getVisualizerColor()}`
+                      : "0 0 0px transparent",
                   }}
                   transition={{
-                    type: 'spring',
+                    type: "spring",
                     stiffness: 500,
-                    damping: 30
+                    damping: 30,
                   }}
                   className="w-0.5 rounded-full"
                 />
@@ -444,10 +591,11 @@ export const JarvisVoice: React.FC<JarvisVoiceProps> = ({ onCommand }) => {
 
           <button
             onClick={isListening ? stopJarvis : startJarvis}
-            className={`flex items-center gap-2 px-8 py-3 rounded-md font-mono text-[10px] uppercase font-bold tracking-[0.2em] transition-all ${isListening
-              ? 'bg-red-500/10 text-red-500 border border-red-500/40 hover:bg-red-500/20'
-              : 'bg-cyan-600/20 text-cyan-400 border border-cyan-500/40 hover:bg-cyan-600/30 glow-cyan'
-              }`}
+            className={`flex items-center gap-2 px-8 py-3 rounded-md font-mono text-[10px] uppercase font-bold tracking-[0.2em] transition-all ${
+              isListening
+                ? "bg-red-500/10 text-red-500 border border-red-500/40 hover:bg-red-500/20"
+                : "bg-cyan-600/20 text-cyan-400 border border-cyan-500/40 hover:bg-cyan-600/30 glow-cyan"
+            }`}
           >
             {isListening ? (
               <>
@@ -463,7 +611,9 @@ export const JarvisVoice: React.FC<JarvisVoiceProps> = ({ onCommand }) => {
           </button>
 
           <div className="flex items-center gap-4 text-slate-600">
-            <Volume2 className={`w-4 h-4 ${isListening ? 'text-cyan-500' : ''}`} />
+            <Volume2
+              className={`w-4 h-4 ${isListening ? "text-cyan-500" : ""}`}
+            />
           </div>
         </div>
       </div>

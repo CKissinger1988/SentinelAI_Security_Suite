@@ -15,31 +15,37 @@
 ### Theme & Styling
 
 #### [MODIFY] [index.css](file:///c:/GitHub/SpartanAI_Security_Core/src/index.css)
-* Add styling for cyber-neon threat color variables.
-* Implement class styles for `.glass-hologram` (`backdrop-filter: blur(12px)`), glow animations, scanlines, and scale-based media queries.
+
+- Add styling for cyber-neon threat color variables.
+- Implement class styles for `.glass-hologram` (`backdrop-filter: blur(12px)`), glow animations, scanlines, and scale-based media queries.
 
 ### Components
 
 #### [MODIFY] [Background3D.tsx](file:///c:/GitHub/SpartanAI_Security_Core/src/components/Background3D.tsx)
-* Accept props for `threatLevel`, `activeMode`, and `resolution`.
-* Shift node opacity to `0.1` and scale down when in `tactical` mode.
-* Reduce particle count to 150 on `1080p` and disable 3D animation/particles on `720p` to support legacy hardware.
+
+- Accept props for `threatLevel`, `activeMode`, and `resolution`.
+- Shift node opacity to `0.1` and scale down when in `tactical` mode.
+- Reduce particle count to 150 on `1080p` and disable 3D animation/particles on `720p` to support legacy hardware.
 
 #### [NEW] [GhostWidget.tsx](file:///c:/GitHub/SpartanAI_Security_Core/src/components/GhostWidget.tsx)
-* Displays real-time stealth routing tracker (hop list), AES signature, and an animating canvas noise wave.
-* Synchronizes instantly to the "Stealth Evasion" toggle from the dashboard's Control Hub.
+
+- Displays real-time stealth routing tracker (hop list), AES signature, and an animating canvas noise wave.
+- Synchronizes instantly to the "Stealth Evasion" toggle from the dashboard's Control Hub.
 
 #### [NEW] [OrbitalHUD.tsx](file:///c:/GitHub/SpartanAI_Security_Core/src/components/OrbitalHUD.tsx)
-* Renders the 3D-centered layout. Overlay status gauges as floating SVG rings over the 3D canvas.
-* Place the command shell floating underneath, with compact panels flanking the sides.
+
+- Renders the 3D-centered layout. Overlay status gauges as floating SVG rings over the 3D canvas.
+- Place the command shell floating underneath, with compact panels flanking the sides.
 
 #### [NEW] [TacticalGrid.tsx](file:///c:/GitHub/SpartanAI_Security_Core/src/components/TacticalGrid.tsx)
-* Renders the high-density Bento Grid layout. Houses all SOC controls, ADB terminals, firewall telemetry, and scrolling alerts.
+
+- Renders the high-density Bento Grid layout. Houses all SOC controls, ADB terminals, firewall telemetry, and scrolling alerts.
 
 #### [MODIFY] [Dashboard.tsx](file:///c:/GitHub/SpartanAI_Security_Core/src/components/Dashboard.tsx)
-* Add a sub-tab navigation toggle to switch between Orbital HUD and Tactical Grid.
-* Share the central real-time state with both sub-components.
-* Integrate the new `GhostWidget` into both HUDs.
+
+- Add a sub-tab navigation toggle to switch between Orbital HUD and Tactical Grid.
+- Share the central real-time state with both sub-components.
+- Integrate the new `GhostWidget` into both HUDs.
 
 ---
 
@@ -48,76 +54,81 @@
 ### Task 1: Styling System Expansion
 
 **Files:**
-* Modify: `src/index.css`
 
-- [ ] **Step 1: Expand neon themes and responsive breakpoints**
-  Add class styles for `.glass-hologram`, `.scanlines`, and custom scaling utilities.
+- Modify: `src/index.css`
 
-- [ ] **Step 2: Commit**
-  `git add src/index.css`
-  `git commit -m "style: add glass-hologram and media queries for 4K scaling"`
+* [ ] **Step 1: Expand neon themes and responsive breakpoints**
+      Add class styles for `.glass-hologram`, `.scanlines`, and custom scaling utilities.
+
+* [ ] **Step 2: Commit**
+      `git add src/index.css`
+      `git commit -m "style: add glass-hologram and media queries for 4K scaling"`
 
 ### Task 2: Background3D Scale & Opacity Modulation
 
 **Files:**
-* Modify: `src/components/Background3D.tsx`
 
-- [ ] **Step 1: Add props and scale settings**
-  Update `Background3D.tsx` to handle screen resolution and active dashboard mode. Modulate canvas opacity and particle size dynamically.
+- Modify: `src/components/Background3D.tsx`
 
-- [ ] **Step 2: Commit**
-  `git add src/components/Background3D.tsx`
-  `git commit -m "feat: make 3D background adaptive to mode and threat level"`
+* [ ] **Step 1: Add props and scale settings**
+      Update `Background3D.tsx` to handle screen resolution and active dashboard mode. Modulate canvas opacity and particle size dynamically.
+
+* [ ] **Step 2: Commit**
+      `git add src/components/Background3D.tsx`
+      `git commit -m "feat: make 3D background adaptive to mode and threat level"`
 
 ### Task 3: Real-Time Ghost Widget
 
 **Files:**
-* Create: `src/components/GhostWidget.tsx`
 
-- [ ] **Step 1: Write GhostWidget component**
-  Implement the operations tracker with animating node hops and dynamic canvas noise.
+- Create: `src/components/GhostWidget.tsx`
 
-- [ ] **Step 2: Commit**
-  `git add src/components/GhostWidget.tsx`
-  `git commit -m "feat: add real-time Ghost Operations widget"`
+* [ ] **Step 1: Write GhostWidget component**
+      Implement the operations tracker with animating node hops and dynamic canvas noise.
+
+* [ ] **Step 2: Commit**
+      `git add src/components/GhostWidget.tsx`
+      `git commit -m "feat: add real-time Ghost Operations widget"`
 
 ### Task 4: Sub-Dashboard Viewports
 
 **Files:**
-* Create: `src/components/OrbitalHUD.tsx`
-* Create: `src/components/TacticalGrid.tsx`
 
-- [ ] **Step 1: Build TacticalGrid component**
-  Consolidate the bento-grid widgets (Gauges, Cloud Desk, Toggles, Shell Terminal, Firewall, ADB, alerts, and Ghost widget) in a responsive grid.
+- Create: `src/components/OrbitalHUD.tsx`
+- Create: `src/components/TacticalGrid.tsx`
 
-- [ ] **Step 2: Build OrbitalHUD component**
-  Establish the circular/orbital HUD. Position the status dials in concentric rings layering above the 3D backdrop, and float the command console underneath.
+* [ ] **Step 1: Build TacticalGrid component**
+      Consolidate the bento-grid widgets (Gauges, Cloud Desk, Toggles, Shell Terminal, Firewall, ADB, alerts, and Ghost widget) in a responsive grid.
 
-- [ ] **Step 3: Commit**
-  `git add src/components/OrbitalHUD.tsx src/components/TacticalGrid.tsx`
-  `git commit -m "feat: create separate viewports for Orbital HUD and Tactical Grid"`
+* [ ] **Step 2: Build OrbitalHUD component**
+      Establish the circular/orbital HUD. Position the status dials in concentric rings layering above the 3D backdrop, and float the command console underneath.
+
+* [ ] **Step 3: Commit**
+      `git add src/components/OrbitalHUD.tsx src/components/TacticalGrid.tsx`
+      `git commit -m "feat: create separate viewports for Orbital HUD and Tactical Grid"`
 
 ### Task 5: Dashboard Controller Integration
 
 **Files:**
-* Modify: `src/components/Dashboard.tsx`
 
-- [ ] **Step 1: Integrate sub-dashboards and toggle**
-  Modify `src/components/Dashboard.tsx` to handle the layout swap toggle, rendering either `<OrbitalHUD />` or `<TacticalGrid />` with shared states.
+- Modify: `src/components/Dashboard.tsx`
 
-- [ ] **Step 2: Commit**
-  `git add src/components/Dashboard.tsx`
-  `git commit -m "feat: integrate sub-dashboard switching and shared states"`
+* [ ] **Step 1: Integrate sub-dashboards and toggle**
+      Modify `src/components/Dashboard.tsx` to handle the layout swap toggle, rendering either `<OrbitalHUD />` or `<TacticalGrid />` with shared states.
+
+* [ ] **Step 2: Commit**
+      `git add src/components/Dashboard.tsx`
+      `git commit -m "feat: integrate sub-dashboard switching and shared states"`
 
 ### Task 6: Verification & Testing
 
 - [ ] **Step 1: Run compilation check**
-  Run: `npx tsc --noEmit`
-  Expected: Success, no compilation or TypeScript errors.
+      Run: `npx tsc --noEmit`
+      Expected: Success, no compilation or TypeScript errors.
 
 - [ ] **Step 2: Run Playwright tests**
-  Run: `npx playwright test`
-  Expected: All E2E tests pass.
+      Run: `npx playwright test`
+      Expected: All E2E tests pass.
 
 - [ ] **Step 3: Commit**
-  `git commit -am "chore: resolve layout adjustments and verify tests pass"`
+      `git commit -am "chore: resolve layout adjustments and verify tests pass"`

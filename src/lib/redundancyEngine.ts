@@ -1,9 +1,9 @@
-import os from 'os';
+import os from "os";
 
 export class RedundancyEngine {
   private isRunning: boolean = false;
   private interval: NodeJS.Timeout | null = null;
-  private hardwareStatus: string = 'optimal';
+  private hardwareStatus: string = "optimal";
 
   public start() {
     if (this.isRunning) return;
@@ -27,18 +27,18 @@ export class RedundancyEngine {
     const loadAvg = os.loadavg();
 
     if (loadAvg[0] > 5) {
-      this.hardwareStatus = 'degraded';
+      this.hardwareStatus = "degraded";
     } else if (freeMem / totalMem < 0.1) {
-      this.hardwareStatus = 'critical';
+      this.hardwareStatus = "critical";
     } else {
-      this.hardwareStatus = 'optimal';
+      this.hardwareStatus = "optimal";
     }
   }
 
   public getStatus() {
     return {
       status: this.hardwareStatus,
-      lastCheck: new Date().toISOString()
+      lastCheck: new Date().toISOString(),
     };
   }
 }

@@ -1,72 +1,271 @@
 <h2>Select Dashboard Layout Configuration for 4K</h2>
-<p class="subtitle">Both layouts keep all current features but arrange them differently to optimize high-density 4K resolution.</p>
+<p class="subtitle">
+  Both layouts keep all current features but arrange them differently to
+  optimize high-density 4K resolution.
+</p>
 
 <div class="split">
   <div class="card" data-choice="hud-grid" onclick="toggleSelect(this)">
-    <div class="card-body" style="padding: 1.5rem;">
-      <h3 style="color: var(--selected-border);">Option A: Unified Tactical HUD (Command Center Grid)</h3>
-      <p style="margin-bottom: 1rem;">A structured, high-density Bento Grid layout that categorizes tools logically. Optimizes screen real estate for direct monitoring and fast actions.</p>
-      
-      <div style="background: #111827; border: 1px solid #374151; padding: 10px; border-radius: 8px; font-family: monospace; font-size: 8px; color: #9ca3af;">
-        <div style="display: flex; gap: 4px; margin-bottom: 4px;">
-          <div style="flex: 2; border: 1px dashed #4b5563; padding: 6px; text-align: center;">TOP STATS: 3 Gauges (Pulsing Arcs)</div>
-          <div style="flex: 1; border: 1px dashed #4b5563; padding: 6px; text-align: center;">Core Status</div>
-        </div>
-        <div style="display: flex; gap: 4px; height: 100px;">
-          <div style="flex: 1.5; display: flex; flex-direction: column; gap: 4px;">
-            <div style="flex: 1; border: 1px dashed #4b5563; padding: 4px; text-align: center;">LAUNCH_CLOUD_DESK</div>
-            <div style="flex: 2; border: 1px dashed #4b5563; padding: 4px; text-align: center;">Holographic Control Hub (4 Toggles)</div>
-            <div style="flex: 1.5; border: 1px dashed #4b5563; padding: 4px; text-align: center;">Mobile C2 Link</div>
+    <div class="card-body" style="padding: 1.5rem">
+      <h3 style="color: var(--selected-border)">
+        Option A: Unified Tactical HUD (Command Center Grid)
+      </h3>
+      <p style="margin-bottom: 1rem">
+        A structured, high-density Bento Grid layout that categorizes tools
+        logically. Optimizes screen real estate for direct monitoring and fast
+        actions.
+      </p>
+
+      <div
+        style="
+          background: #111827;
+          border: 1px solid #374151;
+          padding: 10px;
+          border-radius: 8px;
+          font-family: monospace;
+          font-size: 8px;
+          color: #9ca3af;
+        "
+      >
+        <div style="display: flex; gap: 4px; margin-bottom: 4px">
+          <div
+            style="
+              flex: 2;
+              border: 1px dashed #4b5563;
+              padding: 6px;
+              text-align: center;
+            "
+          >
+            TOP STATS: 3 Gauges (Pulsing Arcs)
           </div>
-          <div style="flex: 2; display: flex; flex-direction: column; gap: 4px;">
-            <div style="flex: 2; border: 1px dashed #4b5563; padding: 4px; text-align: center;">SpartanAI_Security_Core Shell (Terminal)</div>
-            <div style="display: flex; gap: 4px; flex: 1.5;">
-              <div style="flex: 1; border: 1px dashed #4b5563; padding: 4px; text-align: center;">Neural Firewall</div>
-              <div style="flex: 1; border: 1px dashed #4b5563; padding: 4px; text-align: center;">Remote ADB</div>
+          <div
+            style="
+              flex: 1;
+              border: 1px dashed #4b5563;
+              padding: 6px;
+              text-align: center;
+            "
+          >
+            Core Status
+          </div>
+        </div>
+        <div style="display: flex; gap: 4px; height: 100px">
+          <div
+            style="flex: 1.5; display: flex; flex-direction: column; gap: 4px"
+          >
+            <div
+              style="
+                flex: 1;
+                border: 1px dashed #4b5563;
+                padding: 4px;
+                text-align: center;
+              "
+            >
+              LAUNCH_CLOUD_DESK
+            </div>
+            <div
+              style="
+                flex: 2;
+                border: 1px dashed #4b5563;
+                padding: 4px;
+                text-align: center;
+              "
+            >
+              Holographic Control Hub (4 Toggles)
+            </div>
+            <div
+              style="
+                flex: 1.5;
+                border: 1px dashed #4b5563;
+                padding: 4px;
+                text-align: center;
+              "
+            >
+              Mobile C2 Link
             </div>
           </div>
-          <div style="flex: 1.2; border: 1px dashed #4b5563; padding: 4px; text-align: center; display: flex; align-items: center; justify-content: center;">
+          <div style="flex: 2; display: flex; flex-direction: column; gap: 4px">
+            <div
+              style="
+                flex: 2;
+                border: 1px dashed #4b5563;
+                padding: 4px;
+                text-align: center;
+              "
+            >
+              SpartanAI_Security_Core Shell (Terminal)
+            </div>
+            <div style="display: flex; gap: 4px; flex: 1.5">
+              <div
+                style="
+                  flex: 1;
+                  border: 1px dashed #4b5563;
+                  padding: 4px;
+                  text-align: center;
+                "
+              >
+                Neural Firewall
+              </div>
+              <div
+                style="
+                  flex: 1;
+                  border: 1px dashed #4b5563;
+                  padding: 4px;
+                  text-align: center;
+                "
+              >
+                Remote ADB
+              </div>
+            </div>
+          </div>
+          <div
+            style="
+              flex: 1.2;
+              border: 1px dashed #4b5563;
+              padding: 4px;
+              text-align: center;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            "
+          >
             IDS Alert Center (Real-Time Scrolling Panel)
           </div>
         </div>
       </div>
-      
-      <div style="margin-top: 1rem; font-size: 0.8rem; color: #6b7280;">
-        <strong>Pros:</strong> Excellent readability, structured layout, terminal-focused, easy to scan in 4K.<br>
+
+      <div style="margin-top: 1rem; font-size: 0.8rem; color: #6b7280">
+        <strong>Pros:</strong> Excellent readability, structured layout,
+        terminal-focused, easy to scan in 4K.<br />
         <strong>Cons:</strong> More traditional command layout.
       </div>
     </div>
   </div>
 
-  <div class="card" data-choice="orbital-telemetry" onclick="toggleSelect(this)">
-    <div class="card-body" style="padding: 1.5rem;">
-      <h3 style="color: var(--selected-border);">Option B: Orbital Telemetry HUD (3D Centerpiece)</h3>
-      <p style="margin-bottom: 1rem;">Puts the interactive 3D neural node graph at the visual center, surrounded by orbital dials and floating holographic telemetry overlays.</p>
-      
-      <div style="background: #111827; border: 1px solid #374151; padding: 10px; border-radius: 8px; font-family: monospace; font-size: 8px; color: #9ca3af;">
-        <div style="display: flex; gap: 4px; height: 120px;">
-          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
-            <div style="flex: 1; border: 1px dashed #4b5563; padding: 4px; text-align: center;">Holographic Control Hub</div>
-            <div style="flex: 1; border: 1px dashed #4b5563; padding: 4px; text-align: center;">Mobile C2 Link</div>
-            <div style="flex: 1; border: 1px dashed #4b5563; padding: 4px; text-align: center;">LAUNCH_CLOUD_DESK</div>
-          </div>
-          <div style="flex: 2.5; display: flex; flex-direction: column; gap: 4px; position: relative;">
-            <div style="flex: 3; border: 1px dashed #a855f7; padding: 4px; text-align: center; background: rgba(168, 85, 247, 0.05);">
-              3D Neural Nodes Visualizer Centerpiece
-              <div style="font-size: 6px; color: #a855f7;">[Floating status dials overlayed]</div>
+  <div
+    class="card"
+    data-choice="orbital-telemetry"
+    onclick="toggleSelect(this)"
+  >
+    <div class="card-body" style="padding: 1.5rem">
+      <h3 style="color: var(--selected-border)">
+        Option B: Orbital Telemetry HUD (3D Centerpiece)
+      </h3>
+      <p style="margin-bottom: 1rem">
+        Puts the interactive 3D neural node graph at the visual center,
+        surrounded by orbital dials and floating holographic telemetry overlays.
+      </p>
+
+      <div
+        style="
+          background: #111827;
+          border: 1px solid #374151;
+          padding: 10px;
+          border-radius: 8px;
+          font-family: monospace;
+          font-size: 8px;
+          color: #9ca3af;
+        "
+      >
+        <div style="display: flex; gap: 4px; height: 120px">
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px">
+            <div
+              style="
+                flex: 1;
+                border: 1px dashed #4b5563;
+                padding: 4px;
+                text-align: center;
+              "
+            >
+              Holographic Control Hub
             </div>
-            <div style="flex: 1.5; border: 1px dashed #4b5563; padding: 4px; text-align: center;">SpartanAI_Security_Core Shell (Floating Console)</div>
+            <div
+              style="
+                flex: 1;
+                border: 1px dashed #4b5563;
+                padding: 4px;
+                text-align: center;
+              "
+            >
+              Mobile C2 Link
+            </div>
+            <div
+              style="
+                flex: 1;
+                border: 1px dashed #4b5563;
+                padding: 4px;
+                text-align: center;
+              "
+            >
+              LAUNCH_CLOUD_DESK
+            </div>
           </div>
-          <div style="flex: 1.2; display: flex; flex-direction: column; gap: 4px;">
-            <div style="flex: 2; border: 1px dashed #4b5563; padding: 4px; text-align: center;">IDS Alert Center</div>
-            <div style="flex: 1; border: 1px dashed #4b5563; padding: 4px; text-align: center;">Firewall & ADB</div>
+          <div
+            style="
+              flex: 2.5;
+              display: flex;
+              flex-direction: column;
+              gap: 4px;
+              position: relative;
+            "
+          >
+            <div
+              style="
+                flex: 3;
+                border: 1px dashed #a855f7;
+                padding: 4px;
+                text-align: center;
+                background: rgba(168, 85, 247, 0.05);
+              "
+            >
+              3D Neural Nodes Visualizer Centerpiece
+              <div style="font-size: 6px; color: #a855f7">
+                [Floating status dials overlayed]
+              </div>
+            </div>
+            <div
+              style="
+                flex: 1.5;
+                border: 1px dashed #4b5563;
+                padding: 4px;
+                text-align: center;
+              "
+            >
+              SpartanAI_Security_Core Shell (Floating Console)
+            </div>
+          </div>
+          <div
+            style="flex: 1.2; display: flex; flex-direction: column; gap: 4px"
+          >
+            <div
+              style="
+                flex: 2;
+                border: 1px dashed #4b5563;
+                padding: 4px;
+                text-align: center;
+              "
+            >
+              IDS Alert Center
+            </div>
+            <div
+              style="
+                flex: 1;
+                border: 1px dashed #4b5563;
+                padding: 4px;
+                text-align: center;
+              "
+            >
+              Firewall & ADB
+            </div>
           </div>
         </div>
       </div>
-      
-      <div style="margin-top: 1rem; font-size: 0.8rem; color: #6b7280;">
-        <strong>Pros:</strong> High visual wow factor, highly immersive 3D telemetry, sci-fi aesthetic.<br>
-        <strong>Cons:</strong> Central console is slightly more complex, and telemetry floats over 3D canvas.
+
+      <div style="margin-top: 1rem; font-size: 0.8rem; color: #6b7280">
+        <strong>Pros:</strong> High visual wow factor, highly immersive 3D
+        telemetry, sci-fi aesthetic.<br />
+        <strong>Cons:</strong> Central console is slightly more complex, and
+        telemetry floats over 3D canvas.
       </div>
     </div>
   </div>

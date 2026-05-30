@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -16,7 +16,7 @@
   .immersive-card {
     @apply bg-slate-900/40 border border-slate-800 rounded-lg backdrop-blur-sm shadow-xl;
   }
-  
+
   .glow-cyan {
     @apply shadow-[0_0_15px_rgba(6,182,212,0.15)];
   }
@@ -68,7 +68,8 @@
   --pulse-speed: 1.8s;
 }
 
-.threat-high, .threat-critical {
+.threat-high,
+.threat-critical {
   --theme-color: #ef4444; /* Red */
   --theme-glow-color: rgba(239, 68, 68, 0.15);
   --theme-glow-color-heavy: rgba(239, 68, 68, 0.35);
@@ -84,7 +85,8 @@
 }
 
 @keyframes pulse-border {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 5px var(--theme-glow-color);
     border-color: var(--theme-color);
   }
@@ -113,20 +115,21 @@
   background: rgba(6, 10, 18, 0.55);
   border: 1px solid rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
-  box-shadow: 0 0 20px var(--theme-glow-color), inset 0 0 10px rgba(255, 255, 255, 0.02);
+  box-shadow:
+    0 0 20px var(--theme-glow-color),
+    inset 0 0 10px rgba(255, 255, 255, 0.02);
   transition: all 0.3s ease;
 }
 
 .glass-hologram:hover {
   border-color: var(--theme-color);
-  box-shadow: 0 0 30px var(--theme-glow-color-heavy), inset 0 0 15px rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 0 30px var(--theme-glow-color-heavy),
+    inset 0 0 15px rgba(255, 255, 255, 0.05);
 }
 
 .scanlines {
-  background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%, 
-    rgba(0, 0, 0, 0.25) 50%
-  );
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
   background-size: 100% 4px;
   z-index: 10;
   pointer-events: none;

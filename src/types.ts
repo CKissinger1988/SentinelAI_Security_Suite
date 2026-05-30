@@ -11,7 +11,16 @@ export interface UploadedFile {
   id: string;
   user: string;
   content: string;
-  type: 'input' | 'output' | 'error' | 'system' | 'banner' | 'info' | 'prompt' | 'success' | 'meterpreter';
+  type:
+    | "input"
+    | "output"
+    | "error"
+    | "system"
+    | "banner"
+    | "info"
+    | "prompt"
+    | "success"
+    | "meterpreter";
   timestamp: string;
 }
 

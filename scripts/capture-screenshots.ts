@@ -1,17 +1,17 @@
-import { chromium } from '@playwright/test';
-import * as fs from 'fs';
-import * as path from 'path';
+import { chromium } from "@playwright/test";
+import * as fs from "fs";
+import * as path from "path";
 
 async function main() {
-  const screenshotDir = path.join(process.cwd(), 'screenshots');
+  const screenshotDir = path.join(process.cwd(), "screenshots");
   if (!fs.existsSync(screenshotDir)) {
     fs.mkdirSync(screenshotDir);
   }
 
-  console.log('Launching browser...');
+  console.log("Launching browser...");
   const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({
-    viewport: { width: 1440, height: 900 }
+    viewport: { width: 1440, height: 900 },
   });
 
   // Mock speech synthesis to prevent audio failures or blocks in headless browser
@@ -25,84 +25,112 @@ async function main() {
       pending: false,
       speaking: false,
       paused: false,
-      onvoiceschanged: null
+      onvoiceschanged: null,
     };
   });
 
   const page = await context.newPage();
 
-  console.log('Navigating to login page...');
-  await page.goto('http://localhost:3001');
+  console.log("Navigating to login page...");
+  await page.goto("http://localhost:3001");
   await page.waitForTimeout(2000);
 
-  console.log('Capturing Login Page...');
-  await page.screenshot({ path: path.join(screenshotDir, '1_login_page.png') });
+  console.log("Capturing Login Page...");
+  await page.screenshot({ path: path.join(screenshotDir, "1_login_page.png") });
 
-  console.log('Entering credentials...');
-  const emailInput = page.locator('input[placeholder="OPERATOR_ID (Username)"]');
-  await emailInput.fill('Creator');
+  console.log("Entering credentials...");
+  const emailInput = page.locator(
+    'input[placeholder="OPERATOR_ID (Username)"]',
+  );
+  await emailInput.fill("Creator");
   const passwordInput = page.locator('input[type="password"]');
-  await passwordInput.fill('@LoveAlways11646');
+  await passwordInput.fill("@LoveAlways11646");
 
-  console.log('Submitting login form...');
-  const loginButton = page.locator('button', { hasText: 'INITIALIZE SECURE ACCESS' });
+  console.log("Submitting login form...");
+  const loginButton = page.locator("button", {
+    hasText: "INITIALIZE SECURE ACCESS",
+  });
   await loginButton.click();
 
   // Wait for login redirection
-  await page.waitForSelector('text=SYSTEM_STATUS_REPORT', { timeout: 15000 });
+  await page.waitForSelector("text=SYSTEM_STATUS_REPORT", { timeout: 15000 });
   // Extra wait for animations to settle
   await page.waitForTimeout(2000);
 
-  console.log('Capturing Dashboard - Low Threat Level (Cyan theme)...');
-  await page.screenshot({ path: path.join(screenshotDir, '2_dashboard_low.png') });
+  console.log("Capturing Dashboard - Low Threat Level (Cyan theme)...");
+  await page.screenshot({
+    path: path.join(screenshotDir, "2_dashboard_low.png"),
+  });
 
-  console.log('Updating Threat Level to Medium (Amber theme)...');
+  console.log("Updating Threat Level to Medium (Amber theme)...");
   await page.evaluate(() => {
-    window.dispatchEvent(new CustomEvent('spartanai-security-core-threat-level', { detail: { level: 'medium' } }));
+    window.dispatchEvent(
+      new CustomEvent("spartanai-security-core-threat-level", {
+        detail: { level: "medium" },
+      }),
+    );
   });
   await page.waitForTimeout(1000);
-  console.log('Capturing Dashboard - Medium Threat Level (Amber theme)...');
-  await page.screenshot({ path: path.join(screenshotDir, '3_dashboard_medium.png') });
+  console.log("Capturing Dashboard - Medium Threat Level (Amber theme)...");
+  await page.screenshot({
+    path: path.join(screenshotDir, "3_dashboard_medium.png"),
+  });
 
-  console.log('Updating Threat Level to Critical (Red theme)...');
+  console.log("Updating Threat Level to Critical (Red theme)...");
   await page.evaluate(() => {
-    window.dispatchEvent(new CustomEvent('spartanai-security-core-threat-level', { detail: { level: 'critical' } }));
+    window.dispatchEvent(
+      new CustomEvent("spartanai-security-core-threat-level", {
+        detail: { level: "critical" },
+      }),
+    );
   });
   await page.waitForTimeout(1000);
-  console.log('Capturing Dashboard - Critical Threat Level (Red theme)...');
-  await page.screenshot({ path: path.join(screenshotDir, '4_dashboard_critical.png') });
+  console.log("Capturing Dashboard - Critical Threat Level (Red theme)...");
+  await page.screenshot({
+    path: path.join(screenshotDir, "4_dashboard_critical.png"),
+  });
 
   // Restore threat level to low for other pages
   await page.evaluate(() => {
-    window.dispatchEvent(new CustomEvent('spartanai-security-core-threat-level', { detail: { level: 'low' } }));
+    window.dispatchEvent(
+      new CustomEvent("spartanai-security-core-threat-level", {
+        detail: { level: "low" },
+      }),
+    );
   });
   await page.waitForTimeout(500);
 
   // Click Enclave Tab
-  console.log('Navigating to Operational Enclave Tab...');
-  const enclaveTab = page.locator('button', { hasText: 'OP_ENCLAVE' });
+  console.log("Navigating to Operational Enclave Tab...");
+  const enclaveTab = page.locator("button", { hasText: "OP_ENCLAVE" });
   await enclaveTab.click();
   await page.waitForTimeout(1500);
-  console.log('Capturing Operational Enclave...');
-  await page.screenshot({ path: path.join(screenshotDir, '5_operational_enclave.png') });
+  console.log("Capturing Operational Enclave...");
+  await page.screenshot({
+    path: path.join(screenshotDir, "5_operational_enclave.png"),
+  });
 
   // Click Metasploit Tab
-  console.log('Navigating to Metasploit Framework Tab...');
-  const msfTab = page.locator('button', { hasText: 'MSF_FRAMEWORK' });
+  console.log("Navigating to Metasploit Framework Tab...");
+  const msfTab = page.locator("button", { hasText: "MSF_FRAMEWORK" });
   await msfTab.click();
   await page.waitForTimeout(1500);
-  console.log('Capturing Metasploit Framework...');
-  await page.screenshot({ path: path.join(screenshotDir, '6_metasploit_framework.png') });
+  console.log("Capturing Metasploit Framework...");
+  await page.screenshot({
+    path: path.join(screenshotDir, "6_metasploit_framework.png"),
+  });
 
   // Click Jarvis Tab
-  console.log('Navigating to Jarvis/Models Tab...');
-  const jarvisTab = page.locator('button', { hasText: 'JARVIS' });
+  console.log("Navigating to Jarvis/Models Tab...");
+  const jarvisTab = page.locator("button", { hasText: "JARVIS" });
   await jarvisTab.click();
   await page.waitForTimeout(1500);
-  console.log('Capturing Jarvis Models Manager...');
-  await page.screenshot({ path: path.join(screenshotDir, '7_jarvis_models.png') });
+  console.log("Capturing Jarvis Models Manager...");
+  await page.screenshot({
+    path: path.join(screenshotDir, "7_jarvis_models.png"),
+  });
 
-  console.log('Screenshots captured successfully!');
+  console.log("Screenshots captured successfully!");
   await browser.close();
 
   // Create preview page
@@ -110,18 +138,22 @@ async function main() {
 }
 
 function generatePreviewPage(dir: string) {
-  console.log('Generating dashboard_preview.html...');
-  const files = fs.readdirSync(dir).filter(f => f.endsWith('.png')).sort();
-  
-  const cardsHtml = files.map(file => {
-    const title = file
-      .replace(/^\d+_/,'')
-      .replace('.png','')
-      .split('_')
-      .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-      .join(' ');
-      
-    return `
+  console.log("Generating dashboard_preview.html...");
+  const files = fs
+    .readdirSync(dir)
+    .filter((f) => f.endsWith(".png"))
+    .sort();
+
+  const cardsHtml = files
+    .map((file) => {
+      const title = file
+        .replace(/^\d+_/, "")
+        .replace(".png", "")
+        .split("_")
+        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(" ");
+
+      return `
       <div class="card">
         <div class="card-header">${title}</div>
         <div class="card-body">
@@ -129,7 +161,8 @@ function generatePreviewPage(dir: string) {
         </div>
       </div>
     `;
-  }).join('\n');
+    })
+    .join("\n");
 
   const htmlContent = `
 <!DOCTYPE html>
@@ -267,8 +300,11 @@ function generatePreviewPage(dir: string) {
 </html>
   `;
 
-  fs.writeFileSync(path.join(process.cwd(), 'dashboard_preview.html'), htmlContent);
-  console.log('dashboard_preview.html generated successfully!');
+  fs.writeFileSync(
+    path.join(process.cwd(), "dashboard_preview.html"),
+    htmlContent,
+  );
+  console.log("dashboard_preview.html generated successfully!");
 }
 
 main().catch(console.error);

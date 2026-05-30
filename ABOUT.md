@@ -25,24 +25,32 @@ graph TD
 ```
 
 ### A. The Neural Core (Jarvis)
+
 Powered by the Google Gemini API, Jarvis operates as an autonomous agent. When security thresholds are breached:
+
 1. The Intrusion Detection System (IDS) registers telemetry anomalies (e.g., suspicious shell execution or SSH brute-force attempts).
 2. The IDS telemetry is ingested by Jarvis.
 3. If threat severity registers as **Critical**, Jarvis automatically initiates self-directed countermeasures, such as creating exploit proposals, spinning up a local containerized firewall, or triggering host isolation.
 
 ### B. Sovereign Operational Enclave & The Vault
+
 A zero-trust administrative interface that handles system secrets, user metadata, and credential stores.
+
 - **SQLite Database (`spartanai_security_core_vault.sqlite`)**: Replaces transient in-memory storage with persistent tables for credentials, audit logs, remote nodes, and SSH configurations.
 - **AES-256-GCM Encryption**: High-value parameters (such as private keys and access credentials) are encrypted at rest using Galois/Counter Mode.
 - **WebAuthn (FIDO2) / Sovereign Mode**: Root operators can bypass standard database authentication entirely by utilizing hardware security tokens (e.g., YubiKeys) for cryptographic identity validation.
 
 ### C. Metasploit RPC Bridge
-The suite establishes an authenticated MsgPack connection with `msfrpcd` (default port `55553`). 
+
+The suite establishes an authenticated MsgPack connection with `msfrpcd` (default port `55553`).
+
 - **Auto-Sync Engine**: The backend runs a background cron job (`msf-updater.ts`) to pull the latest vulnerability databases and signatures.
 - **Remote Console**: An interactive terminal emulator in the UI allows operators to execute native MSF commands (such as `use exploit/multi/handler`, `set RHOSTS`, and `run`) directly from the Web Console.
 
 ### D. Hardened Android ADB Controller
+
 Designed to interface with mobile C2 nodes over USB or local network tunnels.
+
 - **Wireless Provisioning**: Converts standard USB-connected Android devices into wireless debug targets.
 - **Ghost Routing VPN**: Packages and deploys custom OpenVPN profiles onto target handsets.
 - **Silent APK Extraction**: Downloads and decompiles application packages for inspection directly through the browser.
@@ -54,22 +62,26 @@ Designed to interface with mobile C2 nodes over USB or local network tunnels.
 The suite features an immersive, cyber-tactical interface styled with glassmorphic aesthetics, neon highlights, and real-time state visualization.
 
 ### A. Dynamic Threat-Level Styling
+
 The primary theme color, edge glows, and pulsing animations dynamically react to the system threat level:
 
-| Threat Level | Primary Color | Pulse Speed | Glow Effect | Rationale |
-| :--- | :--- | :--- | :--- | :--- |
-| **Low** | `#06b6d4` (Cyan) | `8s` cycle | Subtle, steady | normal operation state |
-| **Medium** | `#f59e0b` (Amber) | `4s` cycle | Moderate | warning state, active scans in progress |
-| **High / Critical** | `#ef4444` (Red) | `1.5s` cycle | Intense, pulsing | critical breach, active countermeasures |
+| Threat Level        | Primary Color     | Pulse Speed  | Glow Effect      | Rationale                               |
+| :------------------ | :---------------- | :----------- | :--------------- | :-------------------------------------- |
+| **Low**             | `#06b6d4` (Cyan)  | `8s` cycle   | Subtle, steady   | normal operation state                  |
+| **Medium**          | `#f59e0b` (Amber) | `4s` cycle   | Moderate         | warning state, active scans in progress |
+| **High / Critical** | `#ef4444` (Red)   | `1.5s` cycle | Intense, pulsing | critical breach, active countermeasures |
 
 ### B. Circular SVG Gauges
+
 Three real-time status gauges monitor the system's operational parameters using animated SVG stroke-dasharray properties:
+
 - **Shield Integrity**: Monitors the health and encryption state of the security enclave.
 - **Threat Index**: Tracks the aggregate risk score compiled by the IDS scanner.
 - **Network Entropy**: Evaluates noise and potential exfiltration anomalies on the network interface.
 
 ### C. Interactive Output Terminals & Holographic Controllers
-- **SpartanAI_Security_Core Shell**: An interactive terminal interface that maps commands directly to backend scripts (e.g., `probe network`, `sync hsm`, `purge vault`, `status`). 
+
+- **SpartanAI_Security_Core Shell**: An interactive terminal interface that maps commands directly to backend scripts (e.g., `probe network`, `sync hsm`, `purge vault`, `status`).
 - **Holographic Control Hub**: Real-time toggles for:
   - **Decoy Matrix (Honeypot)**: Spins up fake SSH/Web services to divert scanning scripts.
   - **Intrusion IDS**: Enables/disables the deep packet signature inspector.
@@ -81,6 +93,7 @@ Three real-time status gauges monitor the system's operational parameters using 
 ## 4. Verification & Testing
 
 SpartanAI uses Playwright for End-to-End (E2E) verification:
+
 - **Port Mapping**: The application utilizes port `3001` to avoid port conflict with agent background daemons.
 - **Automated Tests**:
   - `Standard Login Flow`: Verifies operator credentials and dashboard redirects.
